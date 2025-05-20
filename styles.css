@@ -1,455 +1,254 @@
-/* Importa las fuentes de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&display=swap'); 
-
-/* Estilos para pantallas pequeñas (móviles) */
-@media (max-width: 767px) {
-    body {
-      font-size: 16px;
-    }
-    .elemento {
-      width: 100%;
-    }
-  }
-  
-  /* Estilos para pantallas medianas (tabletas) */
-  @media (min-width: 768px) and (max-width: 991px) {
-    .elemento {
-      width: 50%;
-    }
-  }
-  
-  /* Estilos para pantallas grandes (escritorio) */
-  @media (min-width: 992px) {
-    .elemento {
-      width: 33.33%;
-    }
-  }
-/* Estilos Generales */
 body {
-    font-family: 'Lora', serif; /* Fuente serif para el cuerpo del texto */
+    font-family: "Lora", serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8; /* Fondo gris claro */
-    color: #333; 
+    background-color: #f8f8f8;
+    color: #333;
     line-height: 1.6;
-}
-
-/* Encabezado */
-header {
-    background-color: #282c34; /* Azul marino oscuro */
+    font-family: sans-serif;
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    background-color: #282c34;
     color: white;
-    padding: 1.5rem 0; 
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-header .container { /* Contenedor para el encabezado */
+    padding: 1.5rem 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  header .container {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    max-width: 960px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
-    
-}
-
-header .logo h1 {
-    font-family: 'Roboto', sans-serif; /* Fuente sans-serif para el logo */
-    font-size: 2rem; 
-    font-weight: 700; 
-    margin: 0; 
-     margin-right: 30px
-}
-
-header nav ul {
+    justify-content: space-between;
+    align-items: center;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  header .logo h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    margin-right: 30px
+  ;
+  }
+  
+  header nav ul {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-}
-
-header nav ul li a {
-    font-family: 'Roboto', sans-serif;
+  }
+  
+  header nav ul li a {
+    font-family: "Roboto", sans-serif;
     text-decoration: none;
     color: white;
-    padding: 0.8rem 1.2rem; 
-    border-radius: 5px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
-}
-
-header nav ul li a:hover {
-    background-color: #d6b26a; /* Dorado suave al pasar el ratón */
-    color: #282c34; /* Texto azul marino al pasar el ratón */
-}
-
-/* Sección Hero */
-.hero-section {
-    background: url('https://via.placeholder.com/1920x600') no-repeat center center/cover;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  header nav ul li a:hover {
+    background-color: #d6b26a;
+    color: #282c34;
+  }
+  
+  .hero-section {
+    background: url("https://via.placeholder.com/1920x600") no-repeat center center/cover;
     color: white;
     text-align: center;
-    display: flex; /* Activa flexbox */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    position: relative; /* Necesario para posicionar el texto sobre la imagen */
-    height: 100vh; /* Ajusta la altura de la sección al 100% del viewport */
-    overflow: hidden; /* Evita desbordamientos */
-    padding: 0; /* Elimina el padding para que el texto esté perfectamente centrado */
-}
-
-.hero-content {
-    position: absolute; /* Posiciona el texto sobre la imagen */
-    text-align: center; /* Centra el texto */
-    color: white; /* Color del texto para que sea legible */
-    z-index: 1; /* Asegura que el texto esté por encima de la imagen */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad */
-    padding: 2rem; /* Espaciado interno */
-    border-radius: 10px; /* Bordes redondeados */
-}
-
-.hero-section h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 3rem; 
-    margin-bottom: 1.5rem; 
-}
-
-.hero-section p {
-    font-size: 1.4rem; 
-    margin-bottom: 3rem; 
-}
-/* Sección Sobre Nosotros */
-.about-section {
-    background-color: white;
-    padding: 5rem 1rem; /* Mayor espacio interno */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    padding: 8rem 1rem;
+  }
+  
+  .hero-content {
+    position: absolute;
     text-align: center;
-}
-
-.about-section .container { /* Contenedor para la sección */
-    max-width: 960px;
-    margin: 0 auto;
-}
-
-.about-section h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 2.5rem; 
-    color: #282c34; 
-    margin-bottom: 3rem; 
-}
-
-.about-content {
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 2rem; 
-}
-
-.about-item {
-    text-align: left; 
-}
-
-.about-item h3 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.8rem; 
-    color: #d6b26a; /* Dorado */
-    margin-bottom: 1rem; 
-}
-
-.about-item p {
-    font-size: 1.1rem; 
-    color: #555;
-}
-
-/* Sección Servicios - Similar estructura a Sobre Nosotros */
-.services-section {
-    background-color: #f8f8f8; 
+    color: white;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+  }
+  
+  .hero-content1 {
+    position: absolute;
+    text-align: center;
+    color: white;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+  }
+  
+  .hero-section h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-section p {
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
+  }
+  
+  .about-section {
+    background-color: white;
     padding: 5rem 1rem;
     text-align: center;
-}
-
-.services-section .container {
+  }
+  
+  .about-section .container {
     max-width: 960px;
     margin: 0 auto;
-}
-
-.services-section h2 {
-    font-family: 'Roboto', sans-serif;
+  }
+  
+  .about-section h2 {
+    font-family: "Roboto", sans-serif;
     font-size: 2.5rem;
     color: #282c34;
     margin-bottom: 3rem;
-}
-
-.services-grid {
+  }
+  
+  .about-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-}
-
-.service-item {
-    background-color: white; 
-    padding: 2rem; 
-    border-radius: 5px; 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
-    text-align: left; 
-}
-
-.service-item h3 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    color: #282c34;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .about-item {
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .about-item h3 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.8rem;
+    color: #d6b26a;
     margin-bottom: 1rem;
-}
-
-.service-item p {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #282c34;
+  }
+  
+  .about-item p {
+    font-size: 1.1rem;
+    color: #555;
     font-size: 1rem;
-    color: #555;
-}
-
-/* Pie de página */
-footer {
-    background-color: #282c34; 
-    color: white;
-    text-align: center;
-    padding: 1.5rem 0; 
-}
-
-footer p {
-    font-size: 0.9rem;
-    margin: 0; 
-}
-
-/* Ajustes para pantallas pequeñas (media queries) */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column; 
-        text-align: center; 
-    }
-
-    header nav ul {
-        margin-top: 1rem; 
-    }
-
-    .hero-section h2 {
-        font-size: 2rem; 
-    }
-
-    .hero-section p {
-        font-size: 1.1rem; 
-    }
-}
-/* Estilos para el formulario */
-/* Importa las fuentes de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&display=swap'); 
-
-/* Estilos Generales */
-body {
-    font-family: 'Lora', serif; /* Fuente serif para el cuerpo del texto */
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8; /* Fondo gris claro */
-    color: #333; 
-    line-height: 1.6;
-}
-
-/* Encabezado */
-header {
-    background-color: #282c34; /* Azul marino oscuro */
-    color: white;
-    padding: 1.5rem 0; 
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-header .container { /* Contenedor para el encabezado */
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    max-width: 960px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
-}
-
-header .logo h1 {
-    font-family: 'Roboto', sans-serif; /* Fuente sans-serif para el logo */
-    font-size: 2rem; 
-    font-weight: 700; 
-    margin: 0; 
-}
-
-header nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-header nav ul li a {
-    font-family: 'Roboto', sans-serif;
-    text-decoration: none;
-    color: white;
-    padding: 0.8rem 1.2rem; 
-    border-radius: 5px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
-}
-
-header nav ul li a:hover {
-    background-color: #d6b26a; /* Dorado suave al pasar el ratón */
-    color: #282c34; /* Texto azul marino al pasar el ratón */
-}
-
-/* Sección Hero */
-.hero-section {
-    background: url('https://via.placeholder.com/1920x600') no-repeat center center/cover;
-    color: white;
-    text-align: center;
-    padding: 8rem 1rem; /* Mayor espacio interno */
-}
-
-.hero-section h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 3rem; 
-    margin-bottom: 1.5rem; 
-}
-
-.hero-section p {
-    font-size: 1.4rem; 
-    margin-bottom: 3rem; 
-}
-
-.hero-section .btn {
-    background-color: #007bff; /* Azul para el botón principal */
-    color: white;
-    padding: 1rem 2rem; 
-    border: none; 
-    border-radius: 5px; 
-    text-decoration: none;
-    font-size: 1.2rem; 
-    font-weight: bold; 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Efecto de sombra */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones */
-}
-
-.hero-section .btn:hover {
-    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
-    transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
-}
-
-/* Sección Sobre Nosotros */
-.about-section {
-    background-color: white;
-    padding: 5rem 1rem; /* Mayor espacio interno */
-    text-align: center;
-}
-
-.about-section .container { /* Contenedor para la sección */
-    max-width: 960px;
-    margin: 0 auto;
-}
-
-.about-section h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 2.5rem; 
-    color: #282c34; 
-    margin-bottom: 3rem; 
-}
-
-.about-content {
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 2rem; 
-}
-
-.about-item {
-    text-align: left; 
-}
-
-.about-item h3 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.8rem; 
-    color: #d6b26a; /* Dorado */
-    margin-bottom: 1rem; 
-}
-
-.about-item p {
-    font-size: 1.1rem; 
-    color: #555;
-}
-
-/* Sección Servicios - Similar estructura a Sobre Nosotros */
-.services-section {
-    background-color: #f8f8f8; 
+  }
+  
+  .services-section {
+    background-color: #f8f8f8;
     padding: 5rem 1rem;
     text-align: center;
-}
-
-.services-section .container {
+  }
+  
+  .services-section .container {
     max-width: 960px;
     margin: 0 auto;
-}
-
-.services-section h2 {
-    font-family: 'Roboto', sans-serif;
+  }
+  
+  .services-section h2 {
+    font-family: "Roboto", sans-serif;
     font-size: 2.5rem;
     color: #282c34;
     margin-bottom: 3rem;
-}
-
-.services-grid {
+  }
+  
+  .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-}
-
-.service-item {
-    background-color: white; 
-    padding: 2rem; 
-    border-radius: 5px; 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
-    text-align: left; 
-}
-
-.service-item h3 {
-    font-family: 'Roboto', sans-serif;
+  }
+  
+  .service-item {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .service-item h3 {
+    font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
     color: #282c34;
     margin-bottom: 1rem;
-}
-
-.service-item p {
+  }
+  
+  .service-item p {
     font-size: 1rem;
     color: #555;
-}
-
-/* Pie de página */
-footer {
-    background-color: #282c34; 
+  }
+  
+  footer {
+    background-color: #282c34;
     color: white;
     text-align: center;
-    padding: 1.5rem 0; 
-}
-
-footer p {
+    padding: 1.5rem 0;
+  }
+  
+  footer p {
     font-size: 0.9rem;
-    margin: 0; 
-}
-
-/* Ajustes para pantallas pequeñas (media queries) */
-@media (max-width: 768px) {
-    header .container {
-        flex-direction: column; 
-        text-align: center; 
-    }
-
-    header nav ul {
-        margin-top: 1rem; 
-    }
-
-    .hero-section h2 {
-        font-size: 2rem; 
-    }
-
-    .hero-section p {
-        font-size: 1.1rem; 
-    }
-}
-/* Estilos para el formulario */
-form {
-    max-width: 500px; 
+    margin: 0;
+  }
+  
+  .hero-section .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .hero-section .btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  .hero-content1 .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .hero-content1 .btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  form {
+    max-width: 500px;
     margin: 2rem auto;
     padding: 2rem;
     background-color: white;
@@ -463,7 +262,7 @@ form {
   }
   
   input,
-  textarea {
+    textarea {
     width: 100%;
     padding: 0.8rem;
     margin-bottom: 1rem;
@@ -473,7 +272,7 @@ form {
   }
   
   button[type="submit"] {
-    background-color: #007bff; /* Azul para el botón */
+    background-color: #007bff;
     color: white;
     padding: 0.8rem 1.5rem;
     border: none;
@@ -486,70 +285,24 @@ form {
     background-color: #0056b3;
   }
   
-  /* Estilos para el submenú */
   .submenu-options li a {
-    color: #333; 
+    position: relative;
+    color: #333;
     padding: 10px 20px;
     text-decoration: none;
     display: block;
+    color: white;
+    background-color: transparent;
   }
   
   .submenu-options li a:hover {
     background-color:  #d6b26a;
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  input,
-  textarea {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  button[type="submit"] {
-    background-color: #007bff; /* Azul para el botón */
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Estilos para el submenú */
-  .submenu-options li a {
-    color: #333; 
-    padding: 10px 20px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .submenu-options li a:hover {
-    background-color: #ddd;
-  }
-  .ventana-contacto {
-    /* ... otros estilos ... */
-    display: none; /* Inicialmente oculto */
-
-}
-}
-body {
-    font-family: sans-serif;
   }
   
   .container {
     max-width: 1200px;
     margin: 20px auto;
+    display: flex;
   }
   
   h2 {
@@ -564,8 +317,8 @@ body {
   }
   
   .filters input,
-  .filters select,
-  .filters button {
+    .filters select,
+    .filters button {
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -585,12 +338,9 @@ body {
   th {
     background-color: #f5f5f5;
   }
-  .container {
-    display: flex; 
-  }
   
   .sidebar {
-    width: 250px; 
+    width: 250px;
     background-color: #f0f0f0;
     padding: 20px;
   }
@@ -608,7 +358,7 @@ body {
   }
   
   .main-content {
-    flex-grow: 1; 
+    flex-grow: 1;
     padding: 20px;
   }
   
@@ -616,226 +366,107 @@ body {
     border: 1px solid #ccc;
     padding: 20px;
     margin-top: 20px;
-    display: none; 
+    display: none;
   }
   
   .assign-area {
     margin-top: 20px;
   }
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-nav {
+  
+  nav {
     background-color: #333;
     color: #fff;
-}
-
-nav ul {
+  }
+  
+  nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
-}
-
-nav ul li {
+  }
+  
+  nav ul li {
     position: relative;
-}
-
-nav ul li a {
+  }
+  
+  nav ul li a {
     color: #fff;
     padding: 15px 20px;
     display: block;
     text-decoration: none;
-}
-
-nav ul li a:hover {
+  }
+  
+  nav ul li a:hover {
     background-color: #555;
-}
-
-.submenu-options {
+  }
+  
+  .submenu-options {
     display: none;
     position: absolute;
     background-color: #333;
     top: 100%;
     left: 0;
     min-width: 200px;
-}
-
-.submenu:hover .submenu-options {
-    display: block;
-}
-
-.submenu-options li a {
-    padding: 10px 20px;
-    color: white; /* Color de texto blanco */
-    text-decoration: none; /* Elimina el subrayado */
-    display: block; /* Ocupa todo el ancho disponible */ 
-    background-color: transparent; /* Fondo transparente para los enlaces */ 
-}
-
-main {
-    padding: 20px;
-}
-
-#contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-#contact-form h2 {
-    text-align: center;
-}
-
-#contact-form form {
-    display: flex;
-    flex-direction: column;
-}
-
-#contact-form label {
-    margin-top: 10px;
-}
-
-#contact-form input,
-#contact-form select,
-#contact-form textarea {
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#contact-form button {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#contact-form button:hover {
-    background-color: #555;
-}
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-nav {
-    background-color: #333;
-    color: #fff;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-/* Sub menu de la hoja principal */
-nav ul li {
-    position: relative;
-}
-
-nav ul li a {
-    color: #fff;
-    padding: 15px 20px;
-    display: block;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    background-color: #555;
-}
-
-main {
-    padding: 20px;
-}
-
-#contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-#contact-form h2 {
-    text-align: center;
-}
-
-#contact-form form {
-    display: flex;
-    flex-direction: column;
-}
-
-#contact-form label {
-    margin-top: 10px;
-}
-
-#contact-form input,
-#contact-form select,
-#contact-form textarea {
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#contact-form button {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#contact-form button:hover {
-    background-color: #555;
-}
-   /* Estilos para las tarjetas............comienzo */
-.about-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
   }
   
-  .about-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+  .submenu:hover .submenu-options {
+    display: block;
+  }
+  
+  main {
     padding: 20px;
-    width: 300px;
+  }
+  
+  #contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  #contact-form h2 {
+    text-align: center;
+  }
+  
+  #contact-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #contact-form label {
+    margin-top: 10px;
+  }
+  
+  #contact-form input,
+  #contact-form select,
+  #contact-form textarea {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #contact-form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  #contact-form button:hover {
+    background-color: #555;
   }
   
   .about-item:hover {
-    transform: translateY(-10px); /* Efecto de elevación */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-  }
-  
-  .about-item h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #282c34;
-  }
-  
-  .about-item p {
-    font-size: 1rem;
-    color: #555;
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   
   .hidden-content {
-    display: none; /* Contenido adicional oculto por defecto */
+    display: none;
   }
   
-  /* Estilos para la ventana modal */
   .modal {
     display: none;
     position: fixed;
@@ -849,6 +480,8 @@ main {
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
   }
   
   .modal.active {
@@ -865,6 +498,10 @@ main {
     position: relative;
     transform: translateY(-20px);
     transition: transform 0.3s ease;
+    background-color: #fefefe;
+    margin: 15% auto;
+    border: 1px solid #888;
+    width: 80%;
   }
   
   .modal.active .modal-content {
@@ -879,6 +516,7 @@ main {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    right: 20px;
   }
   
   .close:hover {
@@ -887,40 +525,7 @@ main {
   
   .modal-body {
     margin-top: 20px;
-  }
- /* Estilos para la ventana modal.......new */
-.modal {
-    display: none; /* Oculta la ventana modal inicialmente */
-    position: fixed; /* Fija la ventana a la pantalla */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Permite scroll si el contenido es muy largo */
-    background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro semi-transparente */
-}
-
-.modal-content {
-    background-color: #fefefe; /* Fondo blanco */
-    margin: 15% auto; /* Centra verticalmente */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Ancho de la ventana modal */
-    max-width: 600px; /* Ancho máximo */
-    position: relative; /* Para posicionar el botón de cerrar */
-}
-
-.close {
-    color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.modal-body {
     padding: 10px;
-}
+  }
+  
+  
