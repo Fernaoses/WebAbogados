@@ -1,13 +1,19 @@
 // Archivo: styles_VE.js
 // Script para manejar las ventanas emergentes
 
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
     // Código de inicialización para las ventanas emergentes
-    const aboutItems = document.querySelectorAll('.about-item');
-    const popupOverlay = document.getElementById('popup-overlay');
-    const popupContent = document.getElementById('popup-content');
-    const popupBody = document.querySelector('.popup-body');
-    const popupClose = document.querySelector('.popup-close');
+    const aboutItems    = document.querySelectorAll('.about-item'),
+          modales       = document.querySelectorAll('.about-item');
+
+    const popupOverlay  = document.getElementById('popup-overlay'),
+          popupContent  = document.getElementById('popup-content');
+
+    const popupBody     = document.querySelector('.popup-body'),
+          popupClose    = document.querySelector('.popup-close'),
+          modal         = document.querySelector('.modal'),
+          modalContent  = modal.querySelector('.modal-content'),
+          closeButton   = modal.querySelector('.close');
     
     // Añadir evento de clic a cada elemento about-item
     aboutItems.forEach(item => {
@@ -28,14 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Cerrar popup al hacer clic en el botón de cerrar
-    if (popupClose) {
+
         popupClose.addEventListener('click', closePopup);
-    }
+
     
     // Cerrar popup al hacer clic en el overlay
-    if (popupOverlay) {
+
         popupOverlay.addEventListener('click', closePopup);
-    }
+
     
     // Función para cerrar popup
     function closePopup() {
@@ -44,5 +50,21 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Restaurar scroll en el body
         document.body.style.overflow = 'auto';
-    }
-});
+    };
+
+    modales.forEach(item => {
+        item.addEventListener('click', () => {
+        modalContent.innerHTML = item.innerHTML;
+        modal.style.display = 'auto';
+        });
+    });
+    
+    closeButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    window.addEventListener('click', (event) => {
+        if (event.target == modal) {
+        modal.style.display = 'none';
+        }
+    });

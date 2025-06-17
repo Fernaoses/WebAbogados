@@ -1,0 +1,108 @@
+
+/* Encabezado con imagen */
+.hero-section {
+    margin: 0;
+    padding: 0;
+}
+
+.hero-content {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.hero-content h2,
+.hero-content p {
+    margin-bottom: 0;
+}
+
+.hero-image {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* POPUP del tema "Sobre Nosotros" */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+    display: none;
+}
+
+.popup-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 70%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    z-index: 1001;
+    display: none;
+}
+
+.popup-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.popup-close:hover {
+    color: #000;
+}
+
+/* Ocultar contenido que sólo se mostrará en el popup */
+.hidden-content {
+    display: none;
+}
+
+/* Estilos CSS para la ventana modal */
+.modal {
+    display: auto;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+    .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
