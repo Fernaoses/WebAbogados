@@ -10,10 +10,10 @@ const popupOverlay  = document.getElementById('popup-overlay'),
         popupContent  = document.getElementById('popup-content');
 
 const popupBody     = document.querySelector('.popup-body'),
-        popupClose    = document.querySelector('.popup-close'),
-        modal         = document.querySelector('.modal'),
-        modalContent  = modal.querySelector('.modal-content'),
-        closeButton   = modal.querySelector('.close');
+    popupClose    = document.querySelector('.popup-close'),
+    modal         = document.querySelector('.modal'),
+    modalContent  = modal.querySelector('.modal-content'),
+    closeButton   = modal.querySelector('.close');
 
 
 // Añadir evento de clic al botón de política de seguridad
@@ -93,4 +93,42 @@ scrollTopBtn.addEventListener("click", (e) => {
         top: 0,
         behavior: "smooth"
     });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const services = document.querySelectorAll('.service-item');
+const popup = document.getElementById('popup-lateral');
+const servicesSection = document.querySelector('.services-section');
+
+services.forEach(service => {
+  service.addEventListener('click', () => {
+    // Clonar contenido
+    const title = service.querySelector('h3').innerHTML;
+    const description = service.querySelector('p').innerHTML;
+
+    // Agregar al popup
+    popupContent.innerHTML = `<h3>${title}</h3><p>${description}</p>`;
+
+    // Mostrar animación
+    popup.classList.add('active');
+    servicesSection.classList.add('move-left');
+  });
+});
+
+// Cerrar el popup
+popupClose.addEventListener('click', () => {
+  popup.classList.remove('active');
+  servicesSection.classList.remove('move-left');
 });
