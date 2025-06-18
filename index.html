@@ -8,204 +8,152 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="assets/css/newStyle.css">
-
-        <section id="index" class="indice-section">
-          <div class="container">
-              <div class="logo">
-                  <h1><i class="fas fa-gavel"></i> Gestión Legal PTY</h1>
-              </div>
-              <nav>
-                  <ul>
-                      <li><a href="#home"><i class="fas fa-home"></i> Inicio</a></li>
-                      <li><a href="#about"><i class="fas fa-users"></i> Nosotros</a></li>
-                      <li><a href="#services"><i class="fas fa-briefcase"></i> Servicios</a></li>
-                      <li><a href="politica_seguridad.html"><i class="fas fa-shield-alt"></i> Seguridad y Privacidad</a></li>
-                      <li class="submenu">
-                          <a href="#"><i class="fas fa-envelope"></i> Contacto</a>
-                          <ul class="submenu-options">
-                              <li><a href="https://wa.me/50768178670" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-                              <li><a href="formulario-contacto.html"><i class="fas fa-envelope"></i> Correo Electrónico</a></li>
-                              <li><a href="https://www.linkedin.com/in/tu-perfil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                          </ul>
-                      </li>
-                  </ul>
-              </nav>
-          </div>
-        </section>
-        
+        <link rel="stylesheet" href="assets/css/newStyles.css">        
   </head>
-  
-  
-  
+    
   <body>
-    <!-- <header> -->
-<!--     <section id="index" class="indice-section">
-        <div class="container">
-            <div class="logo">
-                <h1><i class="fas fa-gavel"></i> Gestión Legal PTY</h1>
+    <header class="main-header">
+      <div class="container header-container">
+        <h1 class="logo"><i class="fas fa-gavel"></i> Gestión Legal PTY</h1>
+        <nav>
+          <ul class="nav-list">
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#about">Nosotros</a></li>
+            <li><a href="#services">Servicios</a></li>
+            <li id="menu_politica_seguridad"><a>Seguridad</a></li>
+            <li class="submenu">
+              <a href="#">Contacto</a>
+              <ul class="submenu-options">
+                <li><a href="https://wa.me/50768178670" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                <li><a href="formulario-contacto.html"><i class="fas fa-envelope"></i> Correo</a></li>
+                <li><a href="https://www.linkedin.com/in/tu-perfil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-container">
+          <input type="text" placeholder="Buscar..." id="search-input">
+        </div>
+        <button id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+    </header>
+        
+    <section id="home" class="hero-section">
+      <div class="hero-content">
+        <h2>"Luchamos por tu libertad legal"</h2>
+        <p>Conecta con expertos legales que protegen tus derechos y te acompañan en cada paso.</p>
+        <a href="#services" class="btn"><i class="fas fa-arrow-right"></i> Leer más</a>
+      </div>
+      <img src="assets/images/banner.jpg" alt="Abogado en Panamá" class="hero-image">
+    </section>
+        
+    <section id="about" class="about-section">
+      <div class="container">
+        <h2><i class="fas fa-info-circle"></i> Sobre Nosotros</h2>
+        <div class="about-content">
+          <div class="about-item" data-popup="historia">
+            <h3><i class="fas fa-history"></i> Nuestra Historia</h3>
+            <p>Desde sus inicios, nuestra firma ha sido un pilar en el ámbito jurídico panameño...</p>
+            <div class="hidden-content">
+              <h2><i class="fas fa-history"></i> Nuestra Historia</h2>
+              <p>Desde sus inicios en 2005, nuestra firma ha sido un pilar en el ámbito jurídico panameño, ofreciendo servicios legales de alta calidad y construyendo una reputación basada en la excelencia y el compromiso con nuestros clientes.</p>
+              <p>Fundada por el Dr. Carlos Méndez, un reconocido abogado con más de 25 años de experiencia en el campo legal, Gestión Legal PTY nació con la visión de transformar la manera en que se prestan los servicios legales en Panamá.</p>
+              <p>A lo largo de los años, hemos crecido hasta convertirnos en un equipo de profesionales especializados en diferentes áreas del derecho, siempre manteniendo nuestros valores fundamentales: integridad, excelencia y dedicación al cliente.</p>
+              <p>Nuestra trayectoria incluye casos emblemáticos que han sentado precedentes en la jurisprudencia panameña, consolidando nuestra posición como una de las firmas más respetadas del país.</p>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#home"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a href="#about"><i class="fas fa-users"></i> Nosotros</a></li>
-                    <li><a href="#services"><i class="fas fa-briefcase"></i> Servicios</a></li>
-                    <li><a href="politica_seguridad.html"><i class="fas fa-shield-alt"></i> Seguridad y Privacidad</a></li>
-                    <li class="submenu">
-                        <a href="#"><i class="fas fa-envelope"></i> Contacto</a>
-                        <ul class="submenu-options">
-                            <li><a href="https://wa.me/50768178670" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-                            <li><a href="formulario-contacto.html"><i class="fas fa-envelope"></i> Correo Electrónico</a></li>
-                            <li><a href="https://www.linkedin.com/in/tu-perfil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
- -->
-        <section id="home" class="hero-section">
-          <div class="hero-content">
-              <h2>"Luchamos por tu libertad legal"</h2>
-              <p>Conecta con expertos legales que protegen tus derechos y te acompañan en cada paso.</p>
-              <a href="#services" class="btn"><i class="fas fa-arrow-right"></i> Leer más</a>
           </div>
-          <img src="assets/images/banner.jpg" alt="Abogado en Panamá" class="hero-image">
-      </section>
-    <!-- </section> -->
-      
-    <!-- </header> -->
-
-  <!-- <section id="about" class="about-section">
-    <div class="container">
-      <h2><i class="fas fa-info-circle"></i> Sobre Nosotros</h2>
-      <div class="about-content">
-        <div class="about-item" id="historia">
-          <h3><i class="fas fa-history"></i> Nuestra Historia</h3>
-          <p>Desde sus inicios, nuestra firma ha sido un pilar en el ámbito jurídico panameño...</p>
-          <div class="hidden-content">
-            <p>Más detalles sobre nuestra historia...</p>
+          <div class="about-item" data-popup="mision">
+            <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3> 
+            <p>Proteger los derechos y brindar soluciones legales estratégicas a nuestros clientes...</p>
+            <div class="hidden-content">
+              <h2><i class="fas fa-bullseye"></i> Nuestra Misión</h2>
+              <p>Proteger los derechos y brindar soluciones legales estratégicas a nuestros clientes, ofreciendo un servicio personalizado y de alta calidad que satisfaga sus necesidades específicas.</p>
+              <p>Nos comprometemos a:</p>
+              <ul>
+                <li>Ofrecer asesoramiento legal claro y comprensible</li>
+                <li>Desarrollar estrategias legales efectivas y personalizadas</li>
+                <li>Mantener los más altos estándares éticos en nuestra práctica</li>
+                <li>Defender con pasión y determinación los intereses de nuestros clientes</li>
+                <li>Mantenernos actualizados sobre los cambios en la legislación y jurisprudencia</li>
+              </ul>
+              <p>Nuestro objetivo final es ser más que abogados: queremos ser aliados estratégicos que contribuyan al éxito y tranquilidad de nuestros clientes.</p>
+            </div>
           </div>
-        </div>
-        <div class="about-item" id="mision">
-          <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3> 
-          <p>Proteger los derechos y brindar soluciones legales estratégicas a nuestros clientes...</p>
-          <div class="hidden-content">
-            <p>Más detalles sobre nuestra misión...</p>
-          </div>
-        </div>
-        <div class="about-item" id="vision">
-          <h3><i class="fas fa-eye"></i> Nuestra Visión</h3> 
-          <p>Convertirnos en la firma de referencia en Panamá, reconocida por nuestra excelencia...</p>
-          <div class="hidden-content">
-            <p>Más detalles sobre nuestra visión...</p>
+          <div class="about-item" data-popup="vision">
+            <h3><i class="fas fa-eye"></i> Nuestra Visión</h3> 
+            <p>Convertirnos en la firma de referencia en Panamá, reconocida por nuestra excelencia...</p>
+            <div class="hidden-content">
+              <h2><i class="fas fa-eye"></i> Nuestra Visión</h2>
+              <p>Convertirnos en la firma de referencia en Panamá, reconocida por nuestra excelencia, innovación y compromiso con la justicia y el Estado de Derecho.</p>
+              <p>Aspiramos a:</p>
+              <ul>
+                <li>Ser líderes en cada una de nuestras áreas de práctica</li>
+                <li>Revolucionar la manera en que se prestan los servicios legales, incorporando tecnología y métodos innovadores</li>
+                <li>Expandir nuestro alcance a nivel internacional, representando clientes en toda la región</li>
+                <li>Contribuir al desarrollo de un sistema legal más justo y eficiente en Panamá</li>
+                <li>Formar a nuevas generaciones de profesionales del derecho con los más altos estándares éticos y técnicos</li>
+              </ul>
+              <p>Nuestra visión nos impulsa a mejorar constantemente y a buscar la excelencia en cada aspecto de nuestro trabajo.</p>
+            </div>
           </div>
         </div>
       </div>
+    </section>
+            
+    <!-- Estructura para las ventanas emergentes -->
+    <div class="popup-overlay" id="popup-overlay"></div>
+      <div class="popup-content" id="popup-content">
+        <span class="popup-close">&times;</span>
+      <div class="popup-body"></div>
     </div>
-  </section> -->
-
-  <section id="about" class="about-section">
-    <div class="container">
-        <h2><i class="fas fa-info-circle"></i> Sobre Nosotros</h2>
-        <div class="about-content">
-            <div class="about-item" data-popup="historia">
-                <h3><i class="fas fa-history"></i> Nuestra Historia</h3>
-                <p>Desde sus inicios, nuestra firma ha sido un pilar en el ámbito jurídico panameño...</p>
-                <div class="hidden-content">
-                    <h2><i class="fas fa-history"></i> Nuestra Historia</h2>
-                    <p>Desde sus inicios en 2005, nuestra firma ha sido un pilar en el ámbito jurídico panameño, ofreciendo servicios legales de alta calidad y construyendo una reputación basada en la excelencia y el compromiso con nuestros clientes.</p>
-                    <p>Fundada por el Dr. Carlos Méndez, un reconocido abogado con más de 25 años de experiencia en el campo legal, Gestión Legal PTY nació con la visión de transformar la manera en que se prestan los servicios legales en Panamá.</p>
-                    <p>A lo largo de los años, hemos crecido hasta convertirnos en un equipo de profesionales especializados en diferentes áreas del derecho, siempre manteniendo nuestros valores fundamentales: integridad, excelencia y dedicación al cliente.</p>
-                    <p>Nuestra trayectoria incluye casos emblemáticos que han sentado precedentes en la jurisprudencia panameña, consolidando nuestra posición como una de las firmas más respetadas del país.</p>
-                </div>
-            </div>
-            <div class="about-item" data-popup="mision">
-                <h3><i class="fas fa-bullseye"></i> Nuestra Misión</h3> 
-                <p>Proteger los derechos y brindar soluciones legales estratégicas a nuestros clientes...</p>
-                <div class="hidden-content">
-                    <h2><i class="fas fa-bullseye"></i> Nuestra Misión</h2>
-                    <p>Proteger los derechos y brindar soluciones legales estratégicas a nuestros clientes, ofreciendo un servicio personalizado y de alta calidad que satisfaga sus necesidades específicas.</p>
-                    <p>Nos comprometemos a:</p>
-                    <ul>
-                        <li>Ofrecer asesoramiento legal claro y comprensible</li>
-                        <li>Desarrollar estrategias legales efectivas y personalizadas</li>
-                        <li>Mantener los más altos estándares éticos en nuestra práctica</li>
-                        <li>Defender con pasión y determinación los intereses de nuestros clientes</li>
-                        <li>Mantenernos actualizados sobre los cambios en la legislación y jurisprudencia</li>
-                    </ul>
-                    <p>Nuestro objetivo final es ser más que abogados: queremos ser aliados estratégicos que contribuyan al éxito y tranquilidad de nuestros clientes.</p>
-                </div>
-            </div>
-            <div class="about-item" data-popup="vision">
-                <h3><i class="fas fa-eye"></i> Nuestra Visión</h3> 
-                <p>Convertirnos en la firma de referencia en Panamá, reconocida por nuestra excelencia...</p>
-                <div class="hidden-content">
-                    <h2><i class="fas fa-eye"></i> Nuestra Visión</h2>
-                    <p>Convertirnos en la firma de referencia en Panamá, reconocida por nuestra excelencia, innovación y compromiso con la justicia y el Estado de Derecho.</p>
-                    <p>Aspiramos a:</p>
-                    <ul>
-                        <li>Ser líderes en cada una de nuestras áreas de práctica</li>
-                        <li>Revolucionar la manera en que se prestan los servicios legales, incorporando tecnología y métodos innovadores</li>
-                        <li>Expandir nuestro alcance a nivel internacional, representando clientes en toda la región</li>
-                        <li>Contribuir al desarrollo de un sistema legal más justo y eficiente en Panamá</li>
-                        <li>Formar a nuevas generaciones de profesionales del derecho con los más altos estándares éticos y técnicos</li>
-                    </ul>
-                    <p>Nuestra visión nos impulsa a mejorar constantemente y a buscar la excelencia en cada aspecto de nuestro trabajo.</p>
-                </div>
-            </div>
-        </div>
+    
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body"></div>
+      </div>
     </div>
-</section>
-
-<!-- Estructura para las ventanas emergentes -->
-<div class="popup-overlay" id="popup-overlay"></div>
-<div class="popup-content" id="popup-content">
-    <span class="popup-close">&times;</span>
-    <div class="popup-body"></div>
-</div>
-
-  <div class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div class="modal-body"></div>
+            
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+      </div>
     </div>
-  </div>
-  
-  <div class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-    </div>
-  </div>
-
+    
     <section id="services" class="services-section">
-        <div class="container">
-          <h2><i class="fas fa-balance-scale"></i> Nuestros Servicios</h2>
-          <div class="contenedor-ventanas">  </div>
-            <div class="services-grid">
-              <div id="service1" class="service-item">
-                <h3><i class="fas fa-user-friends"></i> Derecho Familiar</h3>
-                <p>Asesoramiento en procesos legales familiares como divorcios y adopciones.</p>
-              </div>
-              <div id="service2" class="service-item">
-                <h3><i class="fas fa-user-shield"></i> Derecho Penal</h3> 
-                <p>Defensa y representación en casos penales.</p>
-              </div>
-              <div id="service3" class="service-item">
-                <h3><i class="fas fa-car-crash"></i> Accidentes</h3> 
-                <p>Compensaciones y apoyo legal tras accidentes.</p>
-              </div>
-              <div id="service4" class="service-item">
-                <h3><i class="fas fa-handshake"></i> Consultoría Legal</h3> 
-                <p>Soluciones legales adaptadas a tus necesidades empresariales o personales.</p>
-              </div>
-            </div>
+      <div class="container">
+        <h2><i class="fas fa-balance-scale"></i> Nuestros Servicios</h2>
+        <div class="contenedor-ventanas">  </div>
+        <div class="services-grid">
+          <div id="service1" class="service-item">
+            <h3><i class="fas fa-user-friends"></i> Derecho Familiar</h3>
+            <p>Asesoramiento en procesos legales familiares como divorcios y adopciones.</p>
           </div>
-      </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Gestión Legal. <i class="far fa-copyright"></i> Todos los derechos reservados.</p> 
+          <div id="service2" class="service-item">
+            <h3><i class="fas fa-user-shield"></i> Derecho Penal</h3> 
+            <p>Defensa y representación en casos penales.</p>
+          </div>
+          <div id="service3" class="service-item">
+            <h3><i class="fas fa-car-crash"></i> Accidentes</h3> 
+            <p>Compensaciones y apoyo legal tras accidentes.</p>
+          </div>
+          <div id="service4" class="service-item">
+            <h3><i class="fas fa-handshake"></i> Consultoría Legal</h3> 
+            <p>Soluciones legales adaptadas a tus necesidades empresariales o personales.</p>
+          </div>
         </div>
+      </div>
+    </section>
+    
+    <!-- Boton para volver arriba -->
+    <a href="#top" class="scroll-top" id="scroll-top-btn" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Gestión Legal. <i class="far fa-copyright"></i> Todos los derechos reservados.</p> 
+      </div>
     </footer>
     
     <script src="assets/js/styles_VE.js"></script>
