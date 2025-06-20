@@ -9,51 +9,6 @@
     font-family: Arial, sans-serif;
   } */
   
-  header {
-    background-color: #282c34;
-    color: white;
-    padding: 1.5rem 0;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  header .logo h1 {
-    font-family: "Roboto", sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0;
-    margin-right: 30px
-  ;
-  }
-  
-  /* header nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  } */
-  
-  header nav ul li a {
-    font-family: "Roboto", sans-serif;
-    text-decoration: none;
-    color: white;
-    padding: 0.8rem 1.2rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  header nav ul li a:hover {
-    background-color: #d6b26a;
-    color: #282c34;
-  }
 /*   
   .hero-section {
     background: url("https://via.placeholder.com/1920x600") no-repeat center center/cover;

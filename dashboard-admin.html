@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Despacho Legal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard-admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="assets/logo-legal.png" alt="Logo Despacho Legal">
+                <h1>Despacho Legal</h1>
+            </div>
+            
+            <nav class="admin-menu">
+                <ul>
+                    <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#usuarios"><i class="fas fa-users"></i> Gestión de Usuarios</a></li>
+                    <li><a href="#solicitudes"><i class="fas fa-file-contract"></i> Solicitudes</a></li>
+                    <li><a href="#asignaciones"><i class="fas fa-tasks"></i> Asignaciones</a></li>
+                    <li><a href="#estadisticas"><i class="fas fa-chart-bar"></i> Estadísticas</a></li>
+                    <li><a href="#configuracion"><i class="fas fa-cog"></i> Configuración</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-panel">
+                <div class="user-info">
+                    <img src="assets/user-avatar.png" alt="Administrador">
+                    <span>Admin Principal</span>
+                </div>
+                <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="admin-header">
+                <h2 id="section-title">Dashboard</h2>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Solicitudes</h3>
+                            <p>142</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Completadas</h3>
+                            <p>87</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>En Proceso</h3>
+                            <p>32</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon bg-red">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Pendientes</h3>
+                            <p>23</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Actividad Reciente</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>Nuevo usuario registrado: <strong>Juan Pérez</strong></p>
+                                <span class="activity-time">Hace 15 minutos</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-file-signature"></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>Solicitud <strong>#1425</strong> asignada al abogado <strong>María Gómez</strong></p>
+                                <span class="activity-time">Hace 2 horas</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>Solicitud <strong>#1418</strong> marcada como completada</p>
+                                <span class="activity-time">Ayer, 16:30</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Management Section -->
+            <section id="usuarios" class="content-section">
+                <div class="section-header">
+                    <h3>Gestión de Usuarios</h3>
+                    <button class="btn btn-primary" id="add-user-btn">
+                        <i class="fas fa-plus"></i> Agregar Usuario
+                    </button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Admin Principal</td>
+                                <td>admin@despacholegal.com</td>
+                                <td><span class="badge badge-admin">Administrador</span></td>
+                                <td><span class="badge badge-active">Activo</span></td>
+                                <td>
+                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>María Gómez</td>
+                                <td>maria.gomez@despacholegal.com</td>
+                                <td><span class="badge badge-lawyer">Abogado</span></td>
+                                <td><span class="badge badge-active">Activo</span></td>
+                                <td>
+                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Carlos Ruiz</td>
+                                <td>carlos.ruiz@despacholegal.com</td>
+                                <td><span class="badge badge-lawyer">Abogado</span></td>
+                                <td><span class="badge badge-inactive">Inactivo</span></td>
+                                <td>
+                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Add User Modal -->
+                <div id="add-user-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h3>Agregar Nuevo Usuario</h3>
+                        <form id="add-user-form">
+                            <div class="form-group">
+                                <label for="user-name">Nombre Completo</label>
+                                <input type="text" id="user-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-email">Email</label>
+                                <input type="email" id="user-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-role">Rol</label>
+                                <select id="user-role" required>
+                                    <option value="">Seleccionar rol...</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="lawyer">Abogado</option>
+                                    <option value="assistant">Asistente</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-password">Contraseña</label>
+                                <input type="password" id="user-password" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Requests Section -->
+            <section id="solicitudes" class="content-section">
+                <div class="section-header">
+                    <h3>Gestión de Solicitudes</h3>
+                    <div class="filter-options">
+                        <select id="request-filter">
+                            <option value="all">Todas las solicitudes</option>
+                            <option value="pending">Pendientes</option>
+                            <option value="in-progress">En progreso</option>
+                            <option value="completed">Completadas</option>
+                            <option value="cancelled">Canceladas</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="requests-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
+                                <th>Asignado a</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1425</td>
+                                <td>Juan Pérez</td>
+                                <td>Divorcio</td>
+                                <td>15/06/2023</td>
+                                <td>María Gómez</td>
+                                <td><span class="badge badge-in-progress">En progreso</span></td>
+                                <td>
+                                    <button class="btn-icon btn-view"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1424</td>
+                                <td>Ana López</td>
+                                <td>Contrato</td>
+                                <td>14/06/2023</td>
+                                <td>No asignado</td>
+                                <td><span class="badge badge-pending">Pendiente</span></td>
+                                <td>
+                                    <button class="btn-icon btn-view"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1423</td>
+                                <td>Roberto Sánchez</td>
+                                <td>Accidente</td>
+                                <td>13/06/2023</td>
+                                <td>Carlos Ruiz</td>
+                                <td><span class="badge badge-completed">Completada</span></td>
+                                <td>
+                                    <button class="btn-icon btn-view"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Request Detail Modal -->
+                <div id="request-detail-modal" class="modal">
+                    <div class="modal-content large">
+                        <span class="close-modal">&times;</span>
+                        <h3>Detalle de Solicitud #1425</h3>
+                        <div class="request-detail">
+                            <div class="detail-row">
+                                <span class="detail-label">Cliente:</span>
+                                <span class="detail-value">Juan Pérez</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Tipo:</span>
+                                <span class="detail-value">Divorcio</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Fecha de creación:</span>
+                                <span class="detail-value">15/06/2023</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Asignado a:</span>
+                                <span class="detail-value">María Gómez</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Estado:</span>
+                                <span class="detail-value"><span class="badge badge-in-progress">En progreso</span></span>
+                            </div>
+                            <div class="detail-row full">
+                                <span class="detail-label">Descripción:</span>
+                                <p class="detail-value">El cliente solicita asesoramiento para proceso de divorcio de mutuo acuerdo. Hay dos hijos menores involucrados y se requiere negociación de pensión alimenticia.</p>
+                            </div>
+                            <div class="detail-row full">
+                                <span class="detail-label">Documentos adjuntos:</span>
+                                <div class="documents-list">
+                                    <div class="document-item">
+                                        <i class="fas fa-file-pdf"></i>
+                                        <span>Acta_matrimonio.pdf</span>
+                                        <button class="btn-icon btn-download"><i class="fas fa-download"></i></button>
+                                    </div>
+                                    <div class="document-item">
+                                        <i class="fas fa-file-word"></i>
+                                        <span>Acuerdo_preliminar.docx</span>
+                                        <button class="btn-icon btn-download"><i class="fas fa-download"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail-actions">
+                                <button class="btn btn-secondary close-modal">Cerrar</button>
+                                <button class="btn btn-primary">Cambiar Estado</button>
+                                <button class="btn btn-primary">Reasignar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assignments Section -->
+            <section id="asignaciones" class="content-section">
+                <div class="section-header">
+                    <h3>Asignación de Casos</h3>
+                </div>
+                
+                <div class="assignment-container">
+                    <div class="unassigned-requests">
+                        <h4>Solicitudes sin asignar</h4>
+                        <div class="request-card">
+                            <div class="request-info">
+                                <h5>#1424 - Contrato</h5>
+                                <p>Cliente: Ana López</p>
+                                <p>Fecha: 14/06/2023</p>
+                            </div>
+                            <div class="request-actions">
+                                <select class="lawyer-select">
+                                    <option value="">Asignar a...</option>
+                                    <option value="1">María Gómez</option>
+                                    <option value="2">Carlos Ruiz</option>
+                                </select>
+                                <button class="btn btn-sm btn-primary">Asignar</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="assigned-requests">
+                        <h4>Solicitudes asignadas</h4>
+                        <div class="request-card">
+                            <div class="request-info">
+                                <h5>#1425 - Divorcio</h5>
+                                <p>Cliente: Juan Pérez</p>
+                                <p>Asignado a: María Gómez</p>
+                            </div>
+                            <div class="request-actions">
+                                <button class="btn btn-sm btn-secondary">Reasignar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section id="estadisticas" class="content-section">
+                <div class="section-header">
+                    <h3>Estadísticas del Sistema</h3>
+                    <div class="time-filter">
+                        <select id="stats-time-filter">
+                            <option value="week">Esta semana</option>
+                            <option value="month">Este mes</option>
+                            <option value="quarter">Este trimestre</option>
+                            <option value="year">Este año</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stats-chart">
+                        <h4>Solicitudes por Estado</h4>
+                        <canvas id="requests-by-status-chart"></canvas>
+                    </div>
+                    <div class="stats-chart">
+                        <h4>Solicitudes por Tipo</h4>
+                        <canvas id="requests-by-type-chart"></canvas>
+                    </div>
+                    <div class="stats-chart">
+                        <h4>Productividad por Abogado</h4>
+                        <canvas id="lawyer-productivity-chart"></canvas>
+                    </div>
+                    <div class="stats-summary">
+                        <h4>Resumen General</h4>
+                        <div class="summary-item">
+                            <span>Solicitudes totales</span>
+                            <strong>142</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span>Tasa de completación</span>
+                            <strong>61%</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span>Tiempo promedio de resolución</span>
+                            <strong>14 días</strong>
+                        </div>
+                        <div class="summary-item">
+                            <span>Clientes activos</span>
+                            <strong>87</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Configuration Section -->
+            <section id="configuracion" class="content-section">
+                <div class="section-header">
+                    <h3>Configuración del Sistema</h3>
+                </div>
+                
+                <div class="config-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="roles">Roles</button>
+                        <button class="tab-btn" data-tab="categories">Categorías</button>
+                        <button class="tab-btn" data-tab="system">Sistema</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="roles-tab">
+                        <div class="table-responsive">
+                            <table class="config-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rol</th>
+                                        <th>Permisos</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Administrador</td>
+                                        <td>Acceso completo al sistema</td>
+                                        <td>
+                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Abogado</td>
+                                        <td>Gestión de casos asignados, actualización de estados</td>
+                                        <td>
+                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Asistente</td>
+                                        <td>Creación de casos, seguimiento básico</td>
+                                        <td>
+                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-primary mt-3">
+                            <i class="fas fa-plus"></i> Agregar Rol
+                        </button>
+                    </div>
+                    
+                    <div class="tab-content" id="categories-tab">
+                        <div class="table-responsive">
+                            <table class="config-table">
+                                <thead>
+                                    <tr>
+                                        <th>Categoría</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Derecho Familiar</td>
+                                        <td>Divorcios, custodias, adopciones</td>
+                                        <td>
+                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Derecho Penal</td>
+                                        <td>Defensa en procesos penales</td>
+                                        <td>
+                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Accidentes</td>
+                                        <td>Reclamaciones por accidentes</td>
+                                        <td>
+                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-primary mt-3">
+                            <i class="fas fa-plus"></i> Agregar Categoría
+                        </button>
+                    </div>
+                    
+                    <div class="tab-content" id="system-tab">
+                        <form class="system-settings-form">
+                            <div class="form-group">
+                                <label for="system-name">Nombre del Sistema</label>
+                                <input type="text" id="system-name" value="Despacho Legal">
+                            </div>
+                            <div class="form-group">
+                                <label for="system-logo">Logo</label>
+                                <div class="logo-upload">
+                                    <img src="assets/logo-legal.png" alt="Logo actual" id="current-logo">
+                                    <input type="file" id="system-logo" accept="image/*">
+                                    <label for="system-logo" class="btn btn-secondary">Cambiar Logo</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="session-timeout">Tiempo de inactividad para cierre de sesión (minutos)</label>
+                                <input type="number" id="session-timeout" value="30" min="5">
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar Configuración</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>

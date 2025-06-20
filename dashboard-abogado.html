@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Abogado - Bufete Legal</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #b8860b;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logout-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: #9a6d0b;
+        }
+        
+        .container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+        
+        sidebar {
+            width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+        
+        .nav-menu {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        
+        .nav-menu li {
+            margin-bottom: 1rem;
+        }
+        
+        .nav-menu a {
+            display: block;
+            padding: 0.5rem;
+            color: var(--dark-gray);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .nav-menu a:hover, .nav-menu a.active {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .nav-menu i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+        
+        .status-filter {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .requests-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .requests-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .requests-list th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .requests-list td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .requests-list tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .requests-list tr:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-in-progress {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-resolved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .view-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .upload-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .change-status-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .request-details {
+            margin-bottom: 2rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            width: 150px;
+            color: var(--primary-color);
+        }
+        
+        .detail-value {
+            flex: 1;
+        }
+        
+        .documents-section {
+            margin-top: 2rem;
+        }
+        
+        .document-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .document-list li {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .upload-section {
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+        
+        .upload-btn {
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+        }
+        
+        .status-select {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-right: 1rem;
+        }
+        
+        .save-status-btn {
+            background-color: var(--success-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Bufete Legal</div>
+        <div class="user-info">
+            <span>Dr. Juan Pérez</span>
+            <button class="logout-btn">Cerrar sesión</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <sidebar>
+            <div class="user-profile">
+                <h3>Panel de Abogado</h3>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#"><i class="fas fa-briefcase"></i> Mis Casos</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendario</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Documentos</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+            </ul>
+        </sidebar>
+        
+        <main>
+            <div class="page-header">
+                <h1 class="page-title">Solicitudes Legales Asignadas</h1>
+                <select class="status-filter">
+                    <option value="all">Todos los estados</option>
+                    <option value="pending">Pendientes</option>
+                    <option value="in-progress">En proceso</option>
+                    <option value="resolved">Resueltos</option>
+                </select>
+            </div>
+            
+            <div class="requests-container">
+                <table class="requests-list">
+                    <thead>
+                        <tr>
+                            <th>ID Caso</th>
+                            <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#2023-001</td>
+                            <td>María González</td>
+                            <td>Divorcio</td>
+                            <td>15/05/2023</td>
+                            <td><span class="status-badge status-in-progress">En proceso</span></td>
+                            <td>
+                                <button class="action-btn view-btn" onclick="openModal()"><i class="fas fa-eye"></i> Ver</button>
+                                <button class="action-btn upload-btn"><i class="fas fa-upload"></i> Subir</button>
+                                <button class="action-btn change-status-btn"><i class="fas fa-sync-alt"></i> Estado</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#2023-002</td>
+                            <td>Carlos Mendoza</td>
+                            <td>Contrato</td>
+                            <td>22/05/2023</td>
+                            <td><span class="status-badge status-pending">Pendiente</span></td>
+                            <td>
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i> Ver</button>
+                                <button class="action-btn upload-btn"><i class="fas fa-upload"></i> Subir</button>
+                                <button class="action-btn change-status-btn"><i class="fas fa-sync-alt"></i> Estado</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#2023-003</td>
+                            <td>Laura Jiménez</td>
+                            <td>Herencia</td>
+                            <td>30/05/2023</td>
+                            <td><span class="status-badge status-resolved">Resuelto</span></td>
+                            <td>
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i> Ver</button>
+                                <button class="action-btn upload-btn"><i class="fas fa-upload"></i> Subir</button>
+                                <button class="action-btn change-status-btn"><i class="fas fa-sync-alt"></i> Estado</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal para ver detalles de la solicitud -->
+    <div class="modal" id="requestModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalles de la Solicitud #2023-001</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="request-details">
+                    <div class="detail-row">
+                        <div class="detail-label">Cliente:</div>
+                        <div class="detail-value">María González</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Tipo de caso:</div>
+                        <div class="detail-value">Divorcio</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Fecha de creación:</div>
+                        <div class="detail-value">15/05/2023</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Estado:</div>
+                        <div class="detail-value"><span class="status-badge status-in-progress">En proceso</span></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Descripción:</div>
+                        <div class="detail-value">
+                            <p>La cliente solicita asesoramiento para proceso de divorcio de mutuo acuerdo. Existen bienes mancomunados que requieren distribución equitativa. Dos hijos menores de edad involucrados.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="documents-section">
+                    <h3>Documentos adjuntos</h3>
+                    <ul class="document-list">
+                        <li>
+                            <span><i class="fas fa-file-pdf"></i> Solicitud_inicial.pdf</span>
+                            <a href="#" class="download-link"><i class="fas fa-download"></i> Descargar</a>
+                        </li>
+                        <li>
+                            <span><i class="fas fa-file-word"></i> Acuerdo_preliminar.docx</span>
+                            <a href="#" class="download-link"><i class="fas fa-download"></i> Descargar</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Subir documentos</h3>
+                    <input type="file" id="documentUpload">
+                    <button class="upload-btn"><i class="fas fa-upload"></i> Subir Documento</button>
+                </div>
+                
+                <div class="status-section">
+                    <h3>Cambiar estado del caso</h3>
+                    <select class="status-select">
+                        <option value="pending">Pendiente</option>
+                        <option value="in-progress" selected>En proceso</option>
+                        <option value="resolved">Resuelto</option>
+                    </select>
+                    <button class="save-status-btn"><i class="fas fa-save"></i> Guardar Estado</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Funciones para abrir y cerrar el modal
+        function openModal() {
+            document.getElementById('requestModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('requestModal').style.display = 'none';
+        }
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            const modal = document.getElementById('requestModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Simular cambio de estado (esto se conectaría a backend en implementación real)
+        document.querySelectorAll('.change-status-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const statusBadge = row.querySelector('.status-badge');
+                
+                // Rotar entre los estados disponibles
+                if (statusBadge.classList.contains('status-pending')) {
+                    statusBadge.textContent = 'En proceso';
+                    statusBadge.className = 'status-badge status-in-progress';
+                } else if (statusBadge.classList.contains('status-in-progress')) {
+                    statusBadge.textContent = 'Resuelto';
+                    statusBadge.className = 'status-badge status-resolved';
+                } else {
+                    statusBadge.textContent = 'Pendiente';
+                    statusBadge.className = 'status-badge status-pending';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

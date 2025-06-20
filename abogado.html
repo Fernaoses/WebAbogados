@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel del Abogado</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #34495e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .panel-section {
+      background: white;
+      margin-bottom: 30px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .panel-section h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    .btn {
+      background-color: #2980b9;
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+    .btn:hover {
+      background-color: #1c5980;
+    }
+    .logout {
+      text-align: right;
+      margin-top: -50px;
+    }
+    .file-input {
+      margin-top: 5px;
+    }
+    select {
+      padding: 5px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1><i class="fas fa-gavel"></i> Panel del Abogado</h1>
+  <div class="logout">
+    <button onclick="cerrarSesion()" class="btn">Cerrar sesión</button>
+  </div>
+</header>
+
+<main>
+  <section class="panel-section">
+    <h3><i class="fas fa-briefcase"></i> Solicitudes Asignadas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Servicio</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaSolicitudes">
+        <tr>
+          <td>Juan Pérez</td>
+          <td>Derecho Penal</td>
+          <td>2024-06-04</td>
+          <td>
+            <select>
+              <option>Pendiente</option>
+              <option selected>En proceso</option>
+              <option>Resuelto</option>
+            </select>
+          </td>
+          <td>
+            <a href="#" class="btn">Ver Detalles</a><br>
+            <input type="file" class="file-input"><br>
+            <button class="btn">Subir Documento</button>
+          </td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<script>
+  function cerrarSesion() {
+    localStorage.removeItem("usuario");
+    window.location.href = "index.html";
+  }
+
+
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  if (!usuario || usuario.rol !== "abogado") {
+    alert("Acceso no autorizado");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: auto;
+      padding-top: 100px;
+    }
+    input {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 8px;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2>Iniciar Sesión</h2>
+  <form onsubmit="return login()">
+    <label>Usuario:</label>
+    <input type="text" id="user" required>
+    <label>Contraseña:</label>
+    <input type="password" id="pass" required>
+    <button type="submit">Ingresar</button>
+  </form>
+
+  <script>
+    const usuarios = [
+      { usuario: "cliente01", contrasena: "1234", rol: "cliente" },
+      { usuario: "admin01", contrasena: "admin123", rol: "admin" },
+      { usuario: "abogado01", contrasena: "lex456", rol: "abogado" }
+    ];
+
+    function login() {
+      const u = document.getElementById("user").value.trim();
+      const p = document.getElementById("pass").value.trim();
+
+      const match = usuarios.find(x => x.usuario === u && x.contrasena === p);
+
+      if (match) {
+        localStorage.setItem("usuario", JSON.stringify(match));
+
+        switch (match.rol) {
+          case "admin":
+            window.location.href = "admin.html";
+            break;
+          case "abogado":
+            window.location.href = "abogado.html";
+            break;
+          default:
+            window.location.href = "dashboard-cliente.html";
+        }
+      } else {
+        alert("Credenciales incorrectas.");
+      }
+
+      return false;
+    }
+  </script>
+</body>
+</html>

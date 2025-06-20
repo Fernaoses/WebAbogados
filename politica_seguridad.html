@@ -4,28 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Seguridad y Confidencialidad</title>
-    <link rel="stylesheet" href="styles_PS.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles_PS.css"> 
+    <link rel="stylesheet" href="assets/css/styles.css"> 
+    <link rel="stylesheet" href="assets/css/newStyles.css"> 
+
+    
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 </head>
 <body>
-    <header>
+    <header class="main-header">
+      <div class="container header-container">
+        <h1 class="logo"><i class="fas fa-gavel"></i> Gestión Legal PTY</h1>
         <nav>
-            <ul>
-                <li><a href="index.html#home"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a href="index.html#about"><i class="fas fa-users"></i> Nosotros</a></li>
-                <li><a href="index.html#services"><i class="fas fa-briefcase"></i> Servicios</a></li>
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-envelope"></i> Contacto</a>
-                    <ul class="submenu-options">
-                        <li><a href="https://wa.me/50768178670" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-                        <li><a href="formulario-contacto.html"><i class="fas fa-envelope"></i> Correo Electrónico</a></li>
-                        <li><a href="https://www.linkedin.com/in/tu-perfil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                    </ul>
-                </li>
-            </ul>
+          <ul class="nav-list">
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#about">Nosotros</a></li>
+            <li><a href="#services">Servicios</a></li>
+            <li id="menu_politica_seguridad"><a href="#seguridad">Seguridad</a></li>
+            <li class="submenu">
+              <a href="#">Contacto</a>
+              <ul class="submenu-options">
+                <li><a href="https://wa.me/50768178670" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                <li><a href="formulario-contacto.html"><i class="fas fa-envelope"></i> Correo</a></li>
+                <li><a href="https://www.linkedin.com/in/tu-perfil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+              </ul>
+            </li>
+          </ul>
         </nav>
-        <h1>Política de Seguridad y Confidencialidad</h1>
+        <div class="search-container">
+          <input type="text" placeholder="Buscar..." id="search-input">
+        </div>
+        <button id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
     </header>
+
     <main>
         <section>
             <h2 data-modal="modal-seguridad">Compromiso con la Seguridad</h2> 
@@ -40,9 +55,11 @@
             <p>La información recopilada será utilizada únicamente para los fines legales autorizados y nunca será compartida sin el consentimiento expreso del cliente.</p>
         </section>
     </main>
+
     <footer>
         <p>&copy; 2025 Tu Negocio Legal. Todos los derechos reservados.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="script.js"></script> </body>
+    <script src="script.js"></script> 
+</body>
 </html>

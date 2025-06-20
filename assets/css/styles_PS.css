@@ -1,62 +1,130 @@
 /* Importa las fuentes de Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lora:wght@400;700&display=swap');
 
-html {
-    scroll-behavior: smooth; /* Efecto de scroll suave */
+
+
+
+/* Encabezado o indice */
+
+
+
+
+.main-header {
+    position: relative;
+    z-index: 10;
 }
 
-body {
-    font-family: 'Lora', serif; /* Fuente serif para el cuerpo del texto */
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8; /* Fondo gris claro */
-    color: #333;
-    line-height: 1.6;
-}
+.main-header nav ul li a {
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .main-header nav ul li a:hover {
+    background-color: #d6b26a;
+    color: #282c34;
+  }
 
-header {
-    background-color: #282c34; /* Azul marino oscuro (styles.css) */
+.main-header {
+    background-color: #282c34;
     color: white;
     padding: 1.5rem 0;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-header .container { /* Contenedor para el encabezado */
+  }
+  
+  .main-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 960px;
     margin: 0 auto;
     padding: 0 20px;
-}
-
-header .logo h1 {
-    font-family: 'Roboto', sans-serif; /* Fuente sans-serif para el logo */
+  }
+  
+  .main-header .logo h1 {
+    font-family: "Roboto", sans-serif;
     font-size: 2rem;
     font-weight: 700;
     margin: 0;
-}
+    margin-right: 30px
+  ;
+  }
 
-header nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-header nav ul li a {
-    font-family: 'Roboto', sans-serif;
+.submenu-options li a {
+    position: relative;
+    color: #333;
+    padding: 10px 20px;
     text-decoration: none;
+    display: block;
     color: white;
-    padding: 0.8rem 1.2rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: transparent;
+  }
+  
+  .submenu-options li a:hover {
+    background-color:  #d6b26a;
+  }
+
+.submenu-options {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+  }
+  
+  .submenu:hover .submenu-options {
+    display: block;
+  }
+
+.submenu-options {
+    position: absolute;
+    background-color: #333; /* o el color que uses */
+    display: none;
+    z-index: 20; /* más alto que el de la imagen */
 }
 
-header nav ul li a:hover {
-    background-color: #d6b26a; /* Dorado suave al pasar el ratón (styles.css) */
-    color: #282c34; /* Texto azul marino al pasar el ratón (styles.css) */
+.submenu:hover .submenu-options {
+    display: block;
+    color: #333;
 }
+
+.submenu-options li a:hover{
+    background-color:  #d6b26a;
+}
+
+
+
+#search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 0% ;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+html {
+    scroll-behavior: smooth; /* Efecto de scroll suave */
+}
+
+
+
 
 
 h1 {
@@ -131,15 +199,12 @@ nav ul {
     display: flex;
 }
 
-nav li {
-    margin-right: 20px;
-}
 
 nav a {
     text-decoration: none;
     color: white; /* Texto blanco (styles.css) */
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background-color 0.3s ease;
     display: flex;
     align-items: center;
