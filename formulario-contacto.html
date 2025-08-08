@@ -13,7 +13,7 @@
             <li><a href="index.html#home"><i class="fas fa-home"></i> Inicio</a></li>
             <li><a href="index.html#about"><i class="fas fa-users"></i> Nosotros</a></li>
             <li><a href="index.html#services"><i class="fas fa-briefcase"></i> Servicios</a></li>
-            <li><a href="politica_seguridad.html"><i class="fas fa-shield-alt"></i> Seguridad y Privacidad</a></li>
+            <li><a href="#" id="menu_politica_seguridad"><i class="fas fa-shield-alt"></i> Seguridad y Privacidad</a></li>
         </ul>
     </nav>
     <!-- Sección principal con el formulario -->
@@ -55,6 +55,14 @@
     <script>
         const form = document.getElementById("contactForm");
         const mainContent = document.getElementById("main-content");
+        const menuPoliticaSeguridad = document.getElementById("menu_politica_seguridad");
+
+        if (menuPoliticaSeguridad) {
+            menuPoliticaSeguridad.addEventListener("click", function (event) {
+                event.preventDefault();
+                window.location.href = "politica_seguridad.html";
+            });
+        }
 
         form.addEventListener("submit", function (event) {
             event.preventDefault(); // Evita el envío normal del formulario

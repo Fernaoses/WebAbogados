@@ -16,10 +16,14 @@ const popupBody     = document.querySelector('.popup-body'),
     closeButton   = modal.querySelector('.close');
 
 
-// Añadir evento de clic al botón de política de seguridad
-document.getElementById("menu_politica_seguridad").addEventListener("click", function () {
-  window.location.href = "politica_seguridad.html";
-});
+// Añadir evento de clic al botón de política de seguridad si existe
+const menuPoliticaSeguridad = document.getElementById("menu_politica_seguridad");
+if (menuPoliticaSeguridad) {
+  menuPoliticaSeguridad.addEventListener("click", function (event) {
+    event.preventDefault();
+    window.location.href = "politica_seguridad.html";
+  });
+}
 
 // Añadir evento de clic a cada elemento about-item
 aboutItems.forEach(item => {
