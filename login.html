@@ -3,39 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Iniciar Sesión</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 400px;
-      margin: auto;
-      padding-top: 100px;
-    }
-    input {
-      display: block;
-      margin-bottom: 10px;
-      width: 100%;
-      padding: 8px;
-    }
-    button {
-      padding: 10px;
-      width: 100%;
-    }
-    .back-link {
-      display: block;
-      margin-top: 15px;
-      text-align: center;
-      color: #007bff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .back-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/loginStyles.css">
+  
 </head>
 <body>
   <h2>Iniciar Sesión</h2>
-  <form onsubmit="return login()">
+  <form id="loginForm">
     <label>Usuario:</label>
     <input type="text" id="user" required>
     <label>Contraseña:</label>
@@ -43,40 +16,8 @@
     <button type="submit">Ingresar</button>
   </form>
 
-  <a href="index.html" class="back-link">Volver al inicio</a>
 
-  <script>
-    const usuarios = [
-      { usuario: "cliente01", contrasena: "1234", rol: "cliente" },
-      { usuario: "admin01", contrasena: "admin123", rol: "admin" },
-      { usuario: "abogado01", contrasena: "lex456", rol: "abogado" }
-    ];
+  <script src="assets/js/login.js"></script>
 
-    function login() {
-      const u = document.getElementById("user").value.trim();
-      const p = document.getElementById("pass").value.trim();
-
-      const match = usuarios.find(x => x.usuario === u && x.contrasena === p);
-
-      if (match) {
-        localStorage.setItem("usuario", JSON.stringify(match));
-
-        switch (match.rol) {
-          case "admin":
-            window.location.href = "dashboard-admin.html";
-            break;
-          case "abogado":
-            window.location.href = "dashboard-abogado.html";
-            break;
-          default:
-            window.location.href = "index.html";
-        }
-      } else {
-        alert("Credenciales incorrectas.");
-      }
-
-      return false;
-    }
-  </script>
 </body>
 </html>
