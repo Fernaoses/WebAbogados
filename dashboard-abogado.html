@@ -325,7 +325,7 @@
         <div class="logo">Bufete Legal</div>
         <div class="user-info">
             <span>Dr. Juan Pérez</span>
-            <button class="logout-btn">Cerrar sesión</button>
+            <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
         </div>
     </header>
     
@@ -512,6 +512,12 @@
                 }
             });
         });
+    </script>
+    <script>
+        function logout() {
+            localStorage.removeItem("usuario");
+            window.location.href = "login.html";
+        }
     </script>
 </body>
 </html>
