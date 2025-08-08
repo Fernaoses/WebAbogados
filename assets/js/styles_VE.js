@@ -111,6 +111,7 @@ scrollTopBtn.addEventListener("click", (e) => {
 const services = document.querySelectorAll('.service-item');
 const popup = document.getElementById('popup-lateral');
 const servicesSection = document.querySelector('.services-section');
+const popupCloseLateral = document.querySelector('.popup-close-lateral');
 
 services.forEach(service => {
   service.addEventListener('click', () => {
@@ -127,8 +128,8 @@ services.forEach(service => {
   });
 });
 
-// Cerrar el popup
-popupClose.addEventListener('click', () => {
+// Cerrar el popup lateral al hacer clic en el botón de cierre (.popup-close-lateral)
+popupCloseLateral.addEventListener('click', () => {
   popup.classList.remove('active');
   servicesSection.classList.remove('move-left');
 });
