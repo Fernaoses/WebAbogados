@@ -33,7 +33,7 @@
                     <img src="assets/user-avatar.png" alt="Administrador">
                     <span>Admin Principal</span>
                 </div>
-                <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                <a href="#" class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
             </div>
         </aside>
 
@@ -570,5 +570,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/scripts.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem("usuario");
+            window.location.href = "login.html";
+        }
+    </script>
 </body>
 </html>
