@@ -7,18 +7,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/styles_PS.css">
+    <link rel="stylesheet" href="assets/css/newNewStyles.css">
 </head>
 <body>
     <header class="main-header">
-      <div class="container header-container">
+      <div class="container">
         <h1 class="logo"><i class="fas fa-gavel"></i> Gestión Legal PTY</h1>
         <nav>
           <ul class="nav-list">
-            <li><a href="#home">Inicio</a></li>
-            <li><a href="#about">Nosotros</a></li>
-            <li><a href="#services">Servicios</a></li>
-            <li id="menu_politica_seguridad"><a href="#seguridad">Seguridad</a></li>
+            <li><a href="index.html#home">Inicio</a></li>
+            <li><a href="index.html#about">Nosotros</a></li>
+            <li><a href="index.html#services">Servicios</a></li>
+            <li><a href="politica_seguridad.html" id="menu_politica_seguridad">Seguridad</a></li>
             <li class="submenu">
               <a href="#">Contacto</a>
               <ul class="submenu-options">
@@ -31,8 +31,9 @@
         </nav>
         <div class="search-container">
           <input type="text" placeholder="Buscar..." id="search-input">
+          <button id="search-btn"><i class="fas fa-search"></i></button>
         </div>
-        <button id="search-btn"><i class="fas fa-search"></i></button>
+        <a href="login.html" class="btn btn-outline-light login-btn">Iniciar sesión</a>
       </div>
     </header>
 
@@ -52,7 +53,9 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Tu Negocio Legal. Todos los derechos reservados.</p>
+      <div class="container">
+        <p>&copy; 2025 Gestión Legal. <i class="far fa-copyright"></i> Todos los derechos reservados.</p>
+      </div>
     </footer>
 </body>
 </html>
