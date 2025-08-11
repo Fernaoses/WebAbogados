@@ -220,6 +220,12 @@ nav a i {
     margin-right: 5px;
 }
 
+/* Resaltar el elemento completo del menú al pasar el cursor */
+.nav-list li:hover {
+    background-color: #d6b26a;
+    color: #282c34;
+}
+
 /* Estilos para el submenú */
 nav ul li {
     position: relative; /* Necesario para posicionar el submenú */
@@ -239,41 +245,23 @@ nav ul li {
     display: block; /* Se muestra al pasar el mouse sobre "Contacto" */
 }
 
-.submenu-options li a {
-    color: #333; /* Color del texto de los enlaces (gris oscuro) */
-    padding: 10px 20px;
-    text-decoration: none; /* Elimina el subrayado */
-    display: block; /* Cada enlace ocupa una línea completa */
-    background-color: transparent; /* Fondo transparente para los enlaces */
-    border-bottom: 1px solid #333; /* Borde inferior sutil para separar los enlaces */
-    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
-}
-
-.submenu-options li a:hover {
-    background-color: #d6b26a; /* Color de fondo al pasar el mouse (dorado) */
-}
-
 .submenu-options li:last-child a { /* Elimina el borde del último enlace */
     border-bottom: none;
 }
-/* Estilo correcto para el submenú del boton contactoo*/
+
+/* Estilo correcto para el submenú del botón contacto */
 .submenu-options li a {
-    color: #eee; 
+    color: #eee;
     padding: 10px 20px;
     text-decoration: none;
     display: block;
     background-color: transparent; /* Fondo transparente por defecto */
     transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
-  }
-  
-  .submenu-options li a:hover {
+}
+
+.submenu-options li a:hover {
     background-color: #d6b26a; /* Fondo dorado */
     color: #282c34; /* Texto azul marino al pasar el ratón */
     font-weight: bold; /* Opcional: hace que el texto sea más llamativo */
     transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
 }
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
