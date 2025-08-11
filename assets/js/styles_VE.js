@@ -25,6 +25,22 @@ if (menuPoliticaSeguridad) {
   });
 }
 
+const loginBtn = document.getElementById("login_btn");
+if (loginBtn) {
+  loginBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    window.location.href = "login.html";
+  });
+}
+
+const linkCorreo = document.getElementById("link_correo");
+if (linkCorreo) {
+  linkCorreo.addEventListener("click", function (event) {
+    event.preventDefault();
+    window.location.href = "formulario-contacto.html";
+  });
+}
+
 // Añadir evento de clic a cada elemento about-item
 aboutItems.forEach(item => {
     item.addEventListener('click', function() {
