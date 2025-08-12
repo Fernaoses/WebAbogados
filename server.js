@@ -73,6 +73,21 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Fallback para archivos estáticos inexistentes
+app.use((req, res, next) => {
+  const ext = path.extname(req.path).toLowerCase();
+  const known = ['.html', '.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'];
+  if (ext && known.includes(ext)) {
+    return res.redirect('/index.html');
+  }
+  next();
+});
+
+// 404 para rutas claramente inexistentes
+app.use((req, res) => {
+  res.status(404).send('404 Not Found');
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en puerto ${PORT}`);
