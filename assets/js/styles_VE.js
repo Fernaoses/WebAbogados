@@ -1,5 +1,4 @@
 // Archivo: styles_VE.js
-// Script de interacción general del sitio
 
 document.addEventListener("DOMContentLoaded", () => {
   const aboutItems = document.querySelectorAll(".about-item");
