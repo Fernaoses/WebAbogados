@@ -73,13 +73,31 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Fallback para archivos estáticos inexistentes
+// Manejo de rutas para páginas sin extensión y activos faltantes
 app.use((req, res, next) => {
   const ext = path.extname(req.path).toLowerCase();
-  const known = ['.html', '.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'];
-  if (ext && known.includes(ext)) {
-    return res.redirect('/index.html');
+  const assetExts = ['.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'];
+  const base = ext ? req.path.slice(0, -ext.length) : req.path;
+  const cleanBase = base.replace(/^\/+/,'');
+  const htmlFile = path.join(__dirname, `${cleanBase || 'index'}.html`);
+
+  if (ext === '.html') {
+    return res.redirect(base || '/');
   }
+
+  if (!ext || !assetExts.includes(ext)) {
+    if (fs.existsSync(htmlFile)) {
+      if (ext) {
+        return res.redirect(base);
+      }
+      return res.sendFile(htmlFile);
+    }
+  }
+
+  if (ext && assetExts.includes(ext)) {
+    return res.redirect('/index');
+  }
+
   next();
 });
 
