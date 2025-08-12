@@ -73,6 +73,39 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Manejo de rutas para páginas sin extensión y activos faltantes
+app.use((req, res, next) => {
+  const ext = path.extname(req.path).toLowerCase();
+  const assetExts = ['.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico'];
+  const base = ext ? req.path.slice(0, -ext.length) : req.path;
+  const cleanBase = base.replace(/^\/+/,'');
+  const htmlFile = path.join(__dirname, `${cleanBase || 'index'}.html`);
+
+  if (ext === '.html') {
+    return res.redirect(base || '/');
+  }
+
+  if (!ext || !assetExts.includes(ext)) {
+    if (fs.existsSync(htmlFile)) {
+      if (ext) {
+        return res.redirect(base);
+      }
+      return res.sendFile(htmlFile);
+    }
+  }
+
+  if (ext && assetExts.includes(ext)) {
+    return res.redirect('/index');
+  }
+
+  next();
+});
+
+// 404 para rutas claramente inexistentes
+app.use((req, res) => {
+  res.status(404).send('404 Not Found');
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en puerto ${PORT}`);
