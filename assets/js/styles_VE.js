@@ -15,6 +15,24 @@ const popupBody     = document.querySelector('.popup-body'),
     modalContent  = modal.querySelector('.modal-content'),
     closeButton   = modal.querySelector('.close');
 
+const menuToggle   = document.getElementById('menu-toggle'),
+      mainNav      = document.getElementById('main-nav');
+
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+  });
+}
+
+const searchBtn    = document.getElementById('search-btn'),
+      searchInput  = document.getElementById('search-input');
+
+if (searchBtn && searchInput) {
+  searchBtn.addEventListener('click', () => {
+    alert(`Buscando: ${searchInput.value}`);
+  });
+}
+
 
 // Añadir evento de clic al botón de política de seguridad si existe
 const menuPoliticaSeguridad = document.getElementById("menu_politica_seguridad");
