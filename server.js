@@ -86,6 +86,37 @@ const server = http.createServer(async (req, res) => {
     return send(res, 401, { message: 'Token inválido' });
   }
 
+  // Servir archivos estáticos para las peticiones GET restantes
+  if (req.method === 'GET' && !parsedUrl.pathname.startsWith('/api/')) {
+    // Para la ruta base servir login.html por defecto
+    const pathname = parsedUrl.pathname === '/' ? '/login.html' : parsedUrl.pathname;
+    const filePath = path.join(__dirname, pathname);
+
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        return notFound(res);
+      }
+
+      const ext = path.extname(filePath).toLowerCase();
+      const types = {
+        '.html': 'text/html',
+        '.css': 'text/css',
+        '.js': 'application/javascript',
+        '.json': 'application/json',
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.jpeg': 'image/jpeg',
+        '.gif': 'image/gif',
+        '.svg': 'image/svg+xml',
+        '.ico': 'image/x-icon'
+      };
+
+      res.writeHead(200, { 'Content-Type': types[ext] || 'application/octet-stream' });
+      res.end(data);
+    });
+    return;
+  }
+
   notFound(res);
 });
 
