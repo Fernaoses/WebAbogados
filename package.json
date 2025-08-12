@@ -12,6 +12,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+<<<<<<< HEAD
     "express": "^5.1.0"
+=======
+    "express": "^4.18.2"
+>>>>>>> b5cb0e6e2e5872a699b2a43d96fc571c23856a69
   }
 }
