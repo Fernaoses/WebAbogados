@@ -20,3 +20,7 @@ Una vez iniciado, abre [http://localhost:3000](http://localhost:3000) en tu nave
 ## Detalles
 
 El servidor se ejecuta por defecto en el puerto `3000`. Puedes cambiarlo estableciendo la variable de entorno `PORT` antes de iniciar la aplicación.
+
+### Registro de usuarios
+
+Los nuevos usuarios se crean siempre con el rol `cliente`; no es posible seleccionar un rol diferente durante el registro.

@@ -20,7 +20,7 @@ function createToken() {
 }
 
 app.post('/api/register', (req, res) => {
-  const { usuario, password, rol } = req.body;
+  const { usuario, password } = req.body;
   if (!usuario || !password) {
     return res.status(400).json({ message: 'Usuario y contraseña requeridos' });
   }
@@ -32,7 +32,7 @@ app.post('/api/register', (req, res) => {
       return res.status(409).json({ message: 'Usuario ya existe' });
     }
     const hashed = bcrypt.hash(password);
-    db.insert({ usuario, password: hashed, rol: rol || 'cliente' }, (err) => {
+    db.insert({ usuario, password: hashed, rol: 'cliente' }, (err) => {
       if (err) {
         return res.status(500).json({ message: 'Error en el servidor' });
       }
