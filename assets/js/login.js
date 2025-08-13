@@ -33,7 +33,6 @@ async function login(event) {
     event.preventDefault();
     const usuario = document.getElementById('newUser').value.trim();
     const password = document.getElementById('newPass').value.trim();
-    const rol = document.getElementById('newRole').value;
     const message = document.getElementById('registerMessage');
     message.textContent = '';
     message.classList.remove('text-danger', 'text-success');
@@ -42,7 +41,7 @@ async function login(event) {
       const res = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario, password, rol })
+        body: JSON.stringify({ usuario, password })
       });
 
     const data = await res.json();
