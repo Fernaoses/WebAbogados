@@ -65,3 +65,16 @@ body {
 .back-btn:hover {
   color: #d4af37;
 }
+
+.toggle-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.toggle-link:hover {
+  color: #d4af37;
+}

@@ -29,10 +29,53 @@ async function login(event) {
   }
 }
 
+async function register(event) {
+  event.preventDefault();
+  const usuario = document.getElementById('newUser').value.trim();
+  const password = document.getElementById('newPass').value.trim();
+  const message = document.getElementById('registerMessage');
+  message.textContent = '';
+  message.classList.remove('text-danger', 'text-success');
+
+  try {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usuario, password })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Error en el servidor');
+    message.classList.add('text-success');
+    message.textContent = 'Registro exitoso. Ya puedes iniciar sesión.';
+    document.getElementById('registerForm').reset();
+    const collapse = bootstrap.Collapse.getInstance(document.getElementById('registerCollapse'));
+    if (collapse) collapse.hide();
+  } catch (err) {
+    message.classList.add('text-danger');
+    message.textContent = err.message;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const registerCollapse = document.getElementById('registerCollapse');
+  const loginTitle = document.querySelector('.login-container h2');
   if (form) {
     form.addEventListener('submit', login);
+  }
+  if (registerForm) {
+    registerForm.addEventListener('submit', register);
+  }
+  if (registerCollapse && form) {
+    registerCollapse.addEventListener('show.bs.collapse', () => {
+      form.style.display = 'none';
+      if (loginTitle) loginTitle.style.display = 'none';
+    });
+    registerCollapse.addEventListener('hide.bs.collapse', () => {
+      form.style.display = 'block';
+      if (loginTitle) loginTitle.style.display = 'block';
+    });
   }
 });
 
