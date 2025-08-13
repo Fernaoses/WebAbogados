@@ -33,6 +33,7 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  position: relative;
 }
 
 .logo {
@@ -147,6 +148,29 @@ body {
 .login-btn:hover {
   background-color: #d4af37;
   color: #000;
+}
+
+.user-icon {
+  color: #d4af37;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.user-info {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #fff;
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  white-space: nowrap;
+}
+
+.user-info.show {
+  display: block;
 }
 
 

@@ -48,6 +48,8 @@ async function register(event) {
     message.classList.add('text-success');
     message.textContent = 'Registro exitoso. Ya puedes iniciar sesión.';
     document.getElementById('registerForm').reset();
+    const collapse = bootstrap.Collapse.getInstance(document.getElementById('registerCollapse'));
+    if (collapse) collapse.hide();
   } catch (err) {
     message.classList.add('text-danger');
     message.textContent = err.message;
@@ -56,12 +58,24 @@ async function register(event) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const registerCollapse = document.getElementById('registerCollapse');
+  const loginTitle = document.querySelector('.login-container h2');
   if (form) {
     form.addEventListener('submit', login);
   }
-  const registerForm = document.getElementById('registerForm');
   if (registerForm) {
     registerForm.addEventListener('submit', register);
+  }
+  if (registerCollapse && form) {
+    registerCollapse.addEventListener('show.bs.collapse', () => {
+      form.style.display = 'none';
+      if (loginTitle) loginTitle.style.display = 'none';
+    });
+    registerCollapse.addEventListener('hide.bs.collapse', () => {
+      form.style.display = 'block';
+      if (loginTitle) loginTitle.style.display = 'block';
+    });
   }
 });
 
