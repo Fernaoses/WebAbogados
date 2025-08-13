@@ -29,10 +29,39 @@ async function login(event) {
   }
 }
 
+async function register(event) {
+  event.preventDefault();
+  const usuario = document.getElementById('newUser').value.trim();
+  const password = document.getElementById('newPass').value.trim();
+  const message = document.getElementById('registerMessage');
+  message.textContent = '';
+  message.classList.remove('text-danger', 'text-success');
+
+  try {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usuario, password })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Error en el servidor');
+    message.classList.add('text-success');
+    message.textContent = 'Registro exitoso. Ya puedes iniciar sesión.';
+    document.getElementById('registerForm').reset();
+  } catch (err) {
+    message.classList.add('text-danger');
+    message.textContent = err.message;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('loginForm');
   if (form) {
     form.addEventListener('submit', login);
+  }
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', register);
   }
 });
 
