@@ -19,6 +19,27 @@ function createToken() {
   return crypto.randomBytes(30).toString('hex');
 }
 
+function getToken(req) {
+  const auth = req.headers['authorization'] || '';
+  if (auth.startsWith('Bearer ')) {
+    return auth.split(' ')[1];
+  }
+  const cookies = req.headers.cookie || '';
+  const match = cookies.match(/token=([^;]+)/);
+  return match ? match[1] : null;
+}
+
+function requireRole(role) {
+  return (req, res, next) => {
+    const token = getToken(req);
+    const session = token && sessions[token];
+    if (session && session.exp > Date.now() && session.rol === role) {
+      return next();
+    }
+    return res.status(401).json({ message: 'No autorizado' });
+  };
+}
+
 app.post('/api/register', (req, res) => {
   const { usuario, password } = req.body;
   if (!usuario || !password) {
@@ -63,6 +84,51 @@ app.get('/api/verify', (req, res) => {
     return res.status(200).json({ usuario: sessions[token].usuario, rol: sessions[token].rol });
   }
   return res.status(401).json({ message: 'Token inválido' });
+});
+
+app.get('/api/users', requireRole('admin'), (req, res) => {
+  db.find({}, { password: 0 }, (err, users) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error en el servidor' });
+    }
+    return res.status(200).json(users);
+  });
+});
+
+app.post('/api/users/:id/role', requireRole('admin'), (req, res) => {
+  const { id } = req.params;
+  const { rol } = req.body;
+  const allowed = ['admin', 'abogado', 'cliente'];
+  if (!allowed.includes(rol)) {
+    return res.status(400).json({ message: 'Rol inválido' });
+  }
+  db.update({ _id: id }, { $set: { rol } }, {}, (err, num) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error en el servidor' });
+    }
+    if (num === 0) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    return res.status(200).json({ message: 'Rol actualizado' });
+  });
+});
+
+app.get('/dashboard-admin', (req, res) => {
+  const token = getToken(req);
+  const session = token && sessions[token];
+  if (session && session.exp > Date.now() && session.rol === 'admin') {
+    return res.sendFile(path.join(__dirname, 'dashboard-admin.html'));
+  }
+  return res.status(401).send('No autorizado');
+});
+
+app.get('/dashboard-abogado', (req, res) => {
+  const token = getToken(req);
+  const session = token && sessions[token];
+  if (session && session.exp > Date.now() && session.rol === 'abogado') {
+    return res.sendFile(path.join(__dirname, 'dashboard-abogado.html'));
+  }
+  return res.status(401).send('No autorizado');
 });
 
 app.get('/', (req, res) => {
