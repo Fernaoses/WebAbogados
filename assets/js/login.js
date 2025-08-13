@@ -14,7 +14,9 @@ async function login(event) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Error en el servidor');
     localStorage.setItem('token', data.token);
+    document.cookie = `token=${data.token}; Path=/`;
     switch (data.rol) {
+      case 'super_admin':
       case 'admin':
         window.location.href = '/dashboard-admin';
         break;

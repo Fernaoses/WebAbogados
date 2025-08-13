@@ -1,12 +1,7 @@
 function cerrarSesion() {
-  localStorage.removeItem("usuario");
-  window.location.href = "/";
-}
-
-const usuario = JSON.parse(localStorage.getItem("usuario"));
-if (!usuario || usuario.rol !== "abogado") {
-  alert("Acceso no autorizado");
-  window.location.href = "/login";
+  localStorage.removeItem('token');
+  document.cookie = 'token=; Max-Age=0; Path=/';
+  window.location.href = '/login';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
