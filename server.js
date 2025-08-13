@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const bcrypt = require('./utils/bcrypt');
-const Datastore = require('nedb');
+const Datastore = require('@seald-io/nedb');
 
 const app = express();
 app.use(express.json());
