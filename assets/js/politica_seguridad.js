@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (inicioLink) {
     inicioLink.addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = 'index.html#home';
+      window.location.href = '/#home';
     });
   }
 
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (nosotrosLink) {
     nosotrosLink.addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = 'index.html#about';
+      window.location.href = '/#about';
     });
   }
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (serviciosLink) {
     serviciosLink.addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = 'index.html#services';
+      window.location.href = '/#services';
     });
   }
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (correoLink) {
     correoLink.addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = 'formulario-contacto.html';
+      window.location.href = '/formulario-contacto';
     });
   }
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (loginBtn) {
     loginBtn.addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = 'login.html';
+      window.location.href = '/login';
     });
   }
 });

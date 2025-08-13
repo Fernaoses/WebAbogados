@@ -16,13 +16,13 @@ async function login(event) {
     localStorage.setItem('token', data.token);
     switch (data.rol) {
       case 'admin':
-        window.location.href = 'dashboard-admin.html';
+        window.location.href = '/dashboard-admin';
         break;
       case 'abogado':
-        window.location.href = 'dashboard-abogado.html';
+        window.location.href = '/dashboard-abogado';
         break;
       default:
-        window.location.href = 'index.html';
+        window.location.href = '/';
     }
   } catch (err) {
     message.textContent = err.message;
