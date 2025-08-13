@@ -536,6 +536,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const token = localStorage.getItem('token');
+
         async function loadUsers() {
             const res = await fetch('/api/users', { headers: { 'Authorization': 'Bearer ' + token } });
             if (!res.ok) return;
@@ -570,7 +571,33 @@
                 tbody.appendChild(tr);
             });
         }
-        document.addEventListener('DOMContentLoaded', loadUsers);
+
+        function setupNavigation() {
+            const links = document.querySelectorAll('.admin-menu a');
+            const sections = document.querySelectorAll('.content-section');
+            const sectionTitle = document.getElementById('section-title');
+
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = link.getAttribute('href').substring(1);
+                    sections.forEach(sec => sec.classList.remove('active'));
+                    document.getElementById(target).classList.add('active');
+                    sectionTitle.textContent = link.textContent.trim();
+                    document.querySelectorAll('.admin-menu li').forEach(li => li.classList.remove('active'));
+                    link.parentElement.classList.add('active');
+                    if (target === 'usuarios') {
+                        loadUsers();
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavigation();
+            loadUsers();
+        });
+
         function logout() {
             localStorage.removeItem('token');
             document.cookie = 'token=; Max-Age=0; Path=/';
