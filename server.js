@@ -3,23 +3,22 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const bcrypt = require('./utils/bcrypt');
+const Database = require('better-sqlite3');
 
 const app = express();
 app.use(express.json());
 app.use(express.static(__dirname));
 
-const USERS_FILE = path.join(__dirname, 'data', 'users.json');
+const dbFile = path.join(__dirname, 'data', 'users.db');
+fs.mkdirSync(path.dirname(dbFile), { recursive: true });
+const db = new Database(dbFile);
+db.prepare(`CREATE TABLE IF NOT EXISTS users (
+  usuario TEXT PRIMARY KEY,
+  password TEXT NOT NULL,
+  rol TEXT NOT NULL
+)`).run();
+
 const sessions = {}; // token -> {usuario, rol, exp}
-
-function readUsers() {
-  try { return JSON.parse(fs.readFileSync(USERS_FILE, 'utf8')); }
-  catch { return []; }
-}
-
-function writeUsers(users) {
-  fs.mkdirSync(path.dirname(USERS_FILE), { recursive: true });
-  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
-}
 
 function createToken() {
   return crypto.randomBytes(30).toString('hex');
@@ -31,13 +30,13 @@ app.post('/api/register', (req, res) => {
     if (!usuario || !password) {
       return res.status(400).json({ message: 'Usuario y contraseña requeridos' });
     }
-    const users = readUsers();
-    if (users.find(u => u.usuario === usuario)) {
+    const existing = db.prepare('SELECT 1 FROM users WHERE usuario = ?').get(usuario);
+    if (existing) {
       return res.status(409).json({ message: 'Usuario ya existe' });
     }
     const hashed = bcrypt.hash(password);
-    users.push({ usuario, password: hashed, rol: rol || 'cliente' });
-    writeUsers(users);
+    db.prepare('INSERT INTO users (usuario, password, rol) VALUES (?, ?, ?)')
+      .run(usuario, hashed, rol || 'cliente');
     return res.status(201).json({ message: 'Registro exitoso' });
   } catch (err) {
     return res.status(500).json({ message: 'Error en el servidor' });
@@ -47,8 +46,7 @@ app.post('/api/register', (req, res) => {
 app.post('/api/login', (req, res) => {
   try {
     const { usuario, password } = req.body;
-    const users = readUsers();
-    const user = users.find(u => u.usuario === usuario);
+    const user = db.prepare('SELECT usuario, password, rol FROM users WHERE usuario = ?').get(usuario);
     if (!user || !bcrypt.compare(password, user.password)) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
