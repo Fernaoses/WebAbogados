@@ -27,14 +27,24 @@ body {
   font-weight: 700;
 }
 
-.login-container input {
-  display: block;
-  width: 100%;
-  margin-top: 0.3rem;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+  .login-container input {
+    display: block;
+    width: 100%;
+    margin-top: 0.3rem;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .login-container select {
+    display: block;
+    width: 100%;
+    margin-top: 0.3rem;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
 
 .login-container button {
   margin-top: 1.5rem;

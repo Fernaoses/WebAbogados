@@ -56,11 +56,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginBtn.innerHTML = '<i class="fas fa-user"></i>';
     loginBtn.classList.remove('btn', 'btn-outline-light', 'login-btn');
     loginBtn.classList.add('user-icon');
-    userInfoDiv.textContent = `Usuario: ${session.usuario} (${session.rol})`;
+
+    let menu = `<p>Usuario: ${session.usuario} (${session.rol})</p>`;
+    if (session.rol === 'admin') {
+      menu += '<a href="/dashboard-admin">Dashboard admin</a>';
+    } else if (session.rol === 'abogado') {
+      menu += '<a href="/dashboard-abogado">Dashboard abogado</a>';
+    }
+    menu += '<a href="#" id="logoutLink">Cerrar sesión</a>';
+    userInfoDiv.innerHTML = menu;
+
     loginBtn.addEventListener('click', (e) => {
       e.preventDefault();
       userInfoDiv.classList.toggle('show');
     });
+
+    const logoutLink = document.getElementById('logoutLink');
+    if (logoutLink) {
+      logoutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        window.location.reload();
+      });
+    }
+
   } else if (loginBtn) {
     loginBtn.addEventListener('click', (event) => {
       event.preventDefault();

@@ -173,6 +173,16 @@ body {
   display: block;
 }
 
+.user-info a {
+  display: block;
+  margin-top: 0.3rem;
+  color: #000;
+  text-decoration: none;
+}
+
+.user-info a:hover {
+  color: #d4af37;
+}
 
 /* HERO SECTION */
 .hero-section {
