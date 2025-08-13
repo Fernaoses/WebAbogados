@@ -44,6 +44,7 @@ async function login(event) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ usuario, password, rol })
       });
+
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Error en el servidor');
     message.classList.add('text-success');

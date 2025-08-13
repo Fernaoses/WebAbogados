@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginBtn.innerHTML = '<i class="fas fa-user"></i>';
     loginBtn.classList.remove('btn', 'btn-outline-light', 'login-btn');
     loginBtn.classList.add('user-icon');
+
     let menu = `<p>Usuario: ${session.usuario} (${session.rol})</p>`;
     if (session.rol === 'admin') {
       menu += '<a href="/dashboard-admin">Dashboard admin</a>';
@@ -64,10 +65,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     menu += '<a href="#" id="logoutLink">Cerrar sesión</a>';
     userInfoDiv.innerHTML = menu;
+
     loginBtn.addEventListener('click', (e) => {
       e.preventDefault();
       userInfoDiv.classList.toggle('show');
     });
+
     const logoutLink = document.getElementById('logoutLink');
     if (logoutLink) {
       logoutLink.addEventListener('click', (e) => {
@@ -76,6 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.reload();
       });
     }
+
   } else if (loginBtn) {
     loginBtn.addEventListener('click', (event) => {
       event.preventDefault();
