@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const bcrypt = require('./utils/bcrypt');
-const Database = require('better-sqlite3');
+const Datastore = require('nedb');
 
 const app = express();
 app.use(express.json());
@@ -11,12 +11,7 @@ app.use(express.static(__dirname));
 
 const dbFile = path.join(__dirname, 'data', 'users.db');
 fs.mkdirSync(path.dirname(dbFile), { recursive: true });
-const db = new Database(dbFile);
-db.prepare(`CREATE TABLE IF NOT EXISTS users (
-  usuario TEXT PRIMARY KEY,
-  password TEXT NOT NULL,
-  rol TEXT NOT NULL
-)`).run();
+const db = new Datastore({ filename: dbFile, autoload: true });
 
 const sessions = {}; // token -> {usuario, rol, exp}
 
@@ -25,37 +20,40 @@ function createToken() {
 }
 
 app.post('/api/register', (req, res) => {
-  try {
-    const { usuario, password, rol } = req.body;
-    if (!usuario || !password) {
-      return res.status(400).json({ message: 'Usuario y contraseña requeridos' });
+  const { usuario, password, rol } = req.body;
+  if (!usuario || !password) {
+    return res.status(400).json({ message: 'Usuario y contraseña requeridos' });
+  }
+  db.findOne({ usuario }, (err, existing) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error en el servidor' });
     }
-    const existing = db.prepare('SELECT 1 FROM users WHERE usuario = ?').get(usuario);
     if (existing) {
       return res.status(409).json({ message: 'Usuario ya existe' });
     }
     const hashed = bcrypt.hash(password);
-    db.prepare('INSERT INTO users (usuario, password, rol) VALUES (?, ?, ?)')
-      .run(usuario, hashed, rol || 'cliente');
-    return res.status(201).json({ message: 'Registro exitoso' });
-  } catch (err) {
-    return res.status(500).json({ message: 'Error en el servidor' });
-  }
+    db.insert({ usuario, password: hashed, rol: rol || 'cliente' }, (err) => {
+      if (err) {
+        return res.status(500).json({ message: 'Error en el servidor' });
+      }
+      return res.status(201).json({ message: 'Registro exitoso' });
+    });
+  });
 });
 
 app.post('/api/login', (req, res) => {
-  try {
-    const { usuario, password } = req.body;
-    const user = db.prepare('SELECT usuario, password, rol FROM users WHERE usuario = ?').get(usuario);
+  const { usuario, password } = req.body;
+  db.findOne({ usuario }, (err, user) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error en el servidor' });
+    }
     if (!user || !bcrypt.compare(password, user.password)) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
     const token = createToken();
     sessions[token] = { usuario: user.usuario, rol: user.rol, exp: Date.now() + 3600 * 1000 };
     return res.status(200).json({ token, rol: user.rol });
-  } catch (err) {
-    return res.status(500).json({ message: 'Error en el servidor' });
-  }
+  });
 });
 
 app.get('/api/verify', (req, res) => {
