@@ -10,7 +10,7 @@
     const data = await res.json();
     if (!res.ok) throw new Error();
     const path = window.location.pathname;
-    if ((path.includes('dashboard-admin') && data.rol !== 'admin') ||
+    if ((path.includes('dashboard-admin') && !['admin','super_admin'].includes(data.rol)) ||
         (path.includes('dashboard-abogado') && data.rol !== 'abogado')) {
       throw new Error();
     }

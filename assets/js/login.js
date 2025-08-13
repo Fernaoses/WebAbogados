@@ -16,6 +16,7 @@ async function login(event) {
     localStorage.setItem('token', data.token);
     document.cookie = `token=${data.token}; Path=/`;
     switch (data.rol) {
+      case 'super_admin':
       case 'admin':
         window.location.href = '/dashboard-admin';
         break;
