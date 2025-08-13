@@ -3,61 +3,57 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const bcrypt = require('./utils/bcrypt');
+const Datastore = require('nedb');
 
 const app = express();
 app.use(express.json());
 app.use(express.static(__dirname));
 
-const USERS_FILE = path.join(__dirname, 'data', 'users.json');
+const dbFile = path.join(__dirname, 'data', 'users.db');
+fs.mkdirSync(path.dirname(dbFile), { recursive: true });
+const db = new Datastore({ filename: dbFile, autoload: true });
+
 const sessions = {}; // token -> {usuario, rol, exp}
-
-function readUsers() {
-  try { return JSON.parse(fs.readFileSync(USERS_FILE, 'utf8')); }
-  catch { return []; }
-}
-
-function writeUsers(users) {
-  fs.mkdirSync(path.dirname(USERS_FILE), { recursive: true });
-  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
-}
 
 function createToken() {
   return crypto.randomBytes(30).toString('hex');
 }
 
 app.post('/api/register', (req, res) => {
-  try {
-    const { usuario, password, rol } = req.body;
-    if (!usuario || !password) {
-      return res.status(400).json({ message: 'Usuario y contraseña requeridos' });
+  const { usuario, password, rol } = req.body;
+  if (!usuario || !password) {
+    return res.status(400).json({ message: 'Usuario y contraseña requeridos' });
+  }
+  db.findOne({ usuario }, (err, existing) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error en el servidor' });
     }
-    const users = readUsers();
-    if (users.find(u => u.usuario === usuario)) {
+    if (existing) {
       return res.status(409).json({ message: 'Usuario ya existe' });
     }
     const hashed = bcrypt.hash(password);
-    users.push({ usuario, password: hashed, rol: rol || 'cliente' });
-    writeUsers(users);
-    return res.status(201).json({ message: 'Registro exitoso' });
-  } catch (err) {
-    return res.status(500).json({ message: 'Error en el servidor' });
-  }
+    db.insert({ usuario, password: hashed, rol: rol || 'cliente' }, (err) => {
+      if (err) {
+        return res.status(500).json({ message: 'Error en el servidor' });
+      }
+      return res.status(201).json({ message: 'Registro exitoso' });
+    });
+  });
 });
 
 app.post('/api/login', (req, res) => {
-  try {
-    const { usuario, password } = req.body;
-    const users = readUsers();
-    const user = users.find(u => u.usuario === usuario);
+  const { usuario, password } = req.body;
+  db.findOne({ usuario }, (err, user) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error en el servidor' });
+    }
     if (!user || !bcrypt.compare(password, user.password)) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
     const token = createToken();
     sessions[token] = { usuario: user.usuario, rol: user.rol, exp: Date.now() + 3600 * 1000 };
     return res.status(200).json({ token, rol: user.rol });
-  } catch (err) {
-    return res.status(500).json({ message: 'Error en el servidor' });
-  }
+  });
 });
 
 app.get('/api/verify', (req, res) => {

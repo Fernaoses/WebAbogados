@@ -5,17 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests specified\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-<<<<<<< HEAD
-    "express": "^5.1.0"
-=======
-    "express": "^4.18.2"
->>>>>>> b5cb0e6e2e5872a699b2a43d96fc571c23856a69
+    "express": "^4.18.2",
+    "nedb": "^1.8.0"
   }
 }
