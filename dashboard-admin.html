@@ -149,47 +149,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Email</th>
                                 <th>Rol</th>
-                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Admin Principal</td>
-                                <td>admin@despacholegal.com</td>
-                                <td><span class="badge badge-admin">Administrador</span></td>
-                                <td><span class="badge badge-active">Activo</span></td>
-                                <td>
-                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>María Gómez</td>
-                                <td>maria.gomez@despacholegal.com</td>
-                                <td><span class="badge badge-lawyer">Abogado</span></td>
-                                <td><span class="badge badge-active">Activo</span></td>
-                                <td>
-                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Carlos Ruiz</td>
-                                <td>carlos.ruiz@despacholegal.com</td>
-                                <td><span class="badge badge-lawyer">Abogado</span></td>
-                                <td><span class="badge badge-inactive">Inactivo</span></td>
-                                <td>
-                                    <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody id="users-body"></tbody>
                     </table>
                 </div>
                 
@@ -571,9 +535,46 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        const token = localStorage.getItem('token');
+        async function loadUsers() {
+            const res = await fetch('/api/users', { headers: { 'Authorization': 'Bearer ' + token } });
+            if (!res.ok) return;
+            const users = await res.json();
+            const tbody = document.getElementById('users-body');
+            tbody.innerHTML = '';
+            users.forEach(u => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${u._id}</td>
+                    <td>${u.usuario}</td>
+                    <td>
+                        <select data-id="${u._id}">
+                            <option value="admin"${u.rol === 'admin' ? ' selected' : ''}>admin</option>
+                            <option value="abogado"${u.rol === 'abogado' ? ' selected' : ''}>abogado</option>
+                            <option value="cliente"${u.rol === 'cliente' ? ' selected' : ''}>cliente</option>
+                        </select>
+                        <button class="btn-icon btn-edit" data-id="${u._id}"><i class="fas fa-save"></i></button>
+                    </td>`;
+                const select = tr.querySelector('select');
+                tr.querySelector('button').addEventListener('click', async () => {
+                    const rol = select.value;
+                    await fetch(`/api/users/${u._id}/role`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify({ rol })
+                    });
+                });
+                tbody.appendChild(tr);
+            });
+        }
+        document.addEventListener('DOMContentLoaded', loadUsers);
         function logout() {
-            localStorage.removeItem("usuario");
-            window.location.href = "/login";
+            localStorage.removeItem('token');
+            document.cookie = 'token=; Max-Age=0; Path=/';
+            window.location.href = '/login';
         }
     </script>
 </body>
