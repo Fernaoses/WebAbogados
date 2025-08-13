@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (menuPoliticaSeguridad) {
     menuPoliticaSeguridad.addEventListener("click", (event) => {
       event.preventDefault();
-      window.location.href = "politica_seguridad.html";
+      window.location.href = "/politica_seguridad";
     });
   }
 
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loginBtn) {
     loginBtn.addEventListener("click", (event) => {
       event.preventDefault();
-      window.location.href = "login.html";
+      window.location.href = "/login";
     });
   }
 
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (linkCorreo) {
     linkCorreo.addEventListener("click", (event) => {
       event.preventDefault();
-      window.location.href = "formulario-contacto.html";
+      window.location.href = "/formulario-contacto";
     });
   }
 
