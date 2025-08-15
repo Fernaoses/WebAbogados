@@ -83,7 +83,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else if (loginBtn) {
     loginBtn.addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = '/login';
+      document.body.classList.add('page-exit');
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 300);
     });
   }
 
