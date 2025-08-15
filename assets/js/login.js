@@ -63,21 +63,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('loginForm');
   const registerForm = document.getElementById('registerForm');
   const registerCollapse = document.getElementById('registerCollapse');
-  const loginTitle = document.querySelector('.login-container h2');
+  const loginTitle = document.getElementById('formTitle');
+  const toggleLink = document.querySelector('.toggle-link');
   if (form) {
     form.addEventListener('submit', login);
   }
   if (registerForm) {
     registerForm.addEventListener('submit', register);
   }
-  if (registerCollapse && form) {
+  if (registerCollapse) {
     registerCollapse.addEventListener('show.bs.collapse', () => {
-      form.style.display = 'none';
-      if (loginTitle) loginTitle.style.display = 'none';
+      if (form) form.style.display = 'none';
+      if (loginTitle) loginTitle.textContent = 'Registro';
+      if (toggleLink) toggleLink.textContent = '¿Ya tienes cuenta? Inicia sesión';
     });
     registerCollapse.addEventListener('hide.bs.collapse', () => {
-      form.style.display = 'block';
-      if (loginTitle) loginTitle.style.display = 'block';
+      if (form) form.style.display = 'block';
+      if (loginTitle) loginTitle.textContent = 'Iniciar Sesión';
+      if (toggleLink) toggleLink.textContent = '¿No tienes cuenta? Regístrate';
     });
   }
 });

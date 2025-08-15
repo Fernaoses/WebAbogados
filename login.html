@@ -7,36 +7,68 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/newNewStyles.css">
   <link rel="stylesheet" href="assets/css/loginStyles.css">
 
 </head>
 <body>
-  <div class="login-container">
-    <h2>Iniciar Sesión</h2>
-    <form id="loginForm">
-      <label>Usuario:</label>
-      <input type="text" id="user" required>
-      <label>Contraseña:</label>
-      <input type="password" id="pass" required>
-      <button type="submit">Ingresar</button>
-      <div id="message" class="mt-2 text-danger"></div>
-    </form>
-    <a class="toggle-link" data-bs-toggle="collapse" href="#registerCollapse" role="button" aria-expanded="false" aria-controls="registerCollapse">¿No tienes cuenta? Regístrate</a>
-    <div class="collapse mt-3" id="registerCollapse">
-      <form id="registerForm">
-        <label>Usuario:</label>
-        <input type="text" id="newUser" required>
-        <label>Contraseña:</label>
-        <input type="password" id="newPass" required>
-
-        <button type="submit">Registrar</button>
-        <div id="registerMessage" class="mt-2"></div>
-      </form>
+  <header class="main-header">
+    <div class="container">
+      <h1 class="logo"><i class="fas fa-gavel"></i> Gestión Legal PTY</h1>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav id="main-nav">
+        <ul class="nav-list">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/index.html#about">Nosotros</a></li>
+          <li><a href="/index.html#services">Servicios</a></li>
+          <li><a href="/politica_seguridad" id="menu_politica_seguridad">Seguridad</a></li>
+          <li class="submenu">
+            <a href="#">Contacto</a>
+            <ul class="submenu-options">
+              <li><a href="https://wa.me/50768178670" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+              <li><a href="#" id="link_correo"><i class="fas fa-envelope"></i> Correo</a></li>
+              <li><a href="https://www.linkedin.com/in/tu-perfil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="search-container">
+        <input type="text" placeholder="Buscar..." id="search-input">
+        <button id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+      <div id="userInfo" class="user-info"></div>
     </div>
-    <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
-  </div>
+  </header>
+
+  <main class="login-wrapper">
+    <div class="login-container">
+      <h2 id="formTitle">Iniciar Sesión</h2>
+      <form id="loginForm">
+        <label>Usuario:</label>
+        <input type="text" id="user" required>
+        <label>Contraseña:</label>
+        <input type="password" id="pass" required>
+        <button type="submit">Ingresar</button>
+        <div id="message" class="mt-2 text-danger"></div>
+      </form>
+      <a class="toggle-link" data-bs-toggle="collapse" href="#registerCollapse" role="button" aria-expanded="false" aria-controls="registerCollapse">¿No tienes cuenta? Regístrate</a>
+      <div class="collapse mt-3" id="registerCollapse">
+        <form id="registerForm">
+          <label>Usuario:</label>
+          <input type="text" id="newUser" required>
+          <label>Contraseña:</label>
+          <input type="password" id="newPass" required>
+          <button type="submit">Registrar</button>
+          <div id="registerMessage" class="mt-2"></div>
+        </form>
+      </div>
+    </div>
+  </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/styles_VE.js"></script>
   <script src="assets/js/login.js"></script>
 
 </body>
