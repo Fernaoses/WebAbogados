@@ -425,3 +425,15 @@ footer {
     font-size: 2rem;
   }
 }
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
