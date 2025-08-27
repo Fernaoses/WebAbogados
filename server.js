@@ -3,16 +3,20 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const bcrypt = require('./utils/bcrypt');
-const Datastore = require('@seald-io/nedb');
+const pool = require('./db');
 
 const app = express();
 app.use(express.json());
 app.use(express.static(__dirname));
 
-const dbFile = path.join(__dirname, 'data', 'users.db');
-fs.mkdirSync(path.dirname(dbFile), { recursive: true });
-const db = new Datastore({ filename: dbFile, autoload: true });
-db.ensureIndex({ fieldName: 'usuario', unique: true });
+const initQuery = `
+CREATE TABLE IF NOT EXISTS usuarios (
+  id SERIAL PRIMARY KEY,
+  usuario TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  rol TEXT NOT NULL
+)`;
+pool.query(initQuery).catch(err => console.error('Error creando tabla', err));
 
 const sessions = {}; // token -> {usuario, rol, exp}
 
@@ -42,41 +46,43 @@ function requireRole(...roles) {
   };
 }
 
-app.post('/api/register', (req, res) => {
+app.post('/api/register', async (req, res) => {
   const { usuario, password } = req.body;
   if (!usuario || !password) {
     return res.status(400).json({ message: 'Usuario y contraseña requeridos' });
   }
-  db.findOne({ usuario }, (err, existing) => {
-    if (err) {
-      return res.status(500).json({ message: 'Error en el servidor' });
-    }
-    if (existing) {
+  const hashed = bcrypt.hash(password);
+  try {
+    await pool.query(
+      'INSERT INTO usuarios (usuario, password, rol) VALUES ($1, $2, $3)',
+      [usuario, hashed, 'cliente']
+    );
+    return res.status(201).json({ message: 'Registro exitoso' });
+  } catch (err) {
+    if (err.code === '23505') {
       return res.status(409).json({ message: 'Usuario ya existe' });
     }
-    const hashed = bcrypt.hash(password);
-    db.insert({ usuario, password: hashed, rol: 'cliente' }, (err) => {
-      if (err) {
-        return res.status(500).json({ message: 'Error en el servidor' });
-      }
-      return res.status(201).json({ message: 'Registro exitoso' });
-    });
-  });
+    return res.status(500).json({ message: 'Error en el servidor' });
+  }
 });
 
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { usuario, password } = req.body;
-  db.findOne({ usuario }, (err, user) => {
-    if (err) {
-      return res.status(500).json({ message: 'Error en el servidor' });
-    }
+  try {
+    const { rows } = await pool.query(
+      'SELECT usuario, password, rol FROM usuarios WHERE usuario = $1',
+      [usuario]
+    );
+    const user = rows[0];
     if (!user || !bcrypt.compare(password, user.password)) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
     const token = createToken();
     sessions[token] = { usuario: user.usuario, rol: user.rol, exp: Date.now() + 3600 * 1000 };
     return res.status(200).json({ token, rol: user.rol });
-  });
+  } catch (err) {
+    return res.status(500).json({ message: 'Error en el servidor' });
+  }
 });
 
 app.get('/api/verify', (req, res) => {
@@ -88,16 +94,17 @@ app.get('/api/verify', (req, res) => {
   return res.status(401).json({ message: 'Token inválido' });
 });
 
-app.get('/api/users', requireRole('admin', 'super_admin'), (req, res) => {
-  db.find({}, { password: 0 }, (err, users) => {
-    if (err) {
-      return res.status(500).json({ message: 'Error en el servidor' });
-    }
+app.get('/api/users', requireRole('admin', 'super_admin'), async (req, res) => {
+  try {
+    const { rows } = await pool.query('SELECT id, usuario, rol FROM usuarios');
+    const users = rows.map(u => ({ _id: u.id, usuario: u.usuario, rol: u.rol }));
     return res.status(200).json(users);
-  });
+  } catch (err) {
+    return res.status(500).json({ message: 'Error en el servidor' });
+  }
 });
 
-app.post('/api/users', requireRole('admin', 'super_admin'), (req, res) => {
+app.post('/api/users', requireRole('admin', 'super_admin'), async (req, res) => {
   const { usuario, password, rol } = req.body;
   const allowed = ['super_admin', 'admin', 'abogado', 'cliente'];
   if (!usuario || !password || !allowed.includes(rol)) {
@@ -107,28 +114,33 @@ app.post('/api/users', requireRole('admin', 'super_admin'), (req, res) => {
     return res.status(403).json({ message: 'No autorizado' });
   }
   const hashed = bcrypt.hash(password);
-  db.insert({ usuario, password: hashed, rol }, (err) => {
-    if (err) {
-      if (err.errorType === 'uniqueViolated') {
-        return res.status(409).json({ message: 'Usuario ya existe' });
-      }
-      return res.status(500).json({ message: 'Error en el servidor' });
-    }
+  try {
+    await pool.query(
+      'INSERT INTO usuarios (usuario, password, rol) VALUES ($1, $2, $3)',
+      [usuario, hashed, rol]
+    );
     return res.status(201).json({ message: 'Usuario creado' });
-  });
+  } catch (err) {
+    if (err.code === '23505') {
+      return res.status(409).json({ message: 'Usuario ya existe' });
+    }
+    return res.status(500).json({ message: 'Error en el servidor' });
+  }
 });
 
-app.post('/api/users/:id/role', requireRole('admin', 'super_admin'), (req, res) => {
-  const { id } = req.params;
+app.post('/api/users/:id/role', requireRole('admin', 'super_admin'), async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  if (Number.isNaN(id)) {
+    return res.status(400).json({ message: 'ID inválido' });
+  }
   const { rol } = req.body;
   const allowed = ['super_admin', 'admin', 'abogado', 'cliente'];
   if (!allowed.includes(rol)) {
     return res.status(400).json({ message: 'Rol inválido' });
   }
-  db.findOne({ _id: id }, (err, user) => {
-    if (err) {
-      return res.status(500).json({ message: 'Error en el servidor' });
-    }
+  try {
+    const { rows } = await pool.query('SELECT id, rol FROM usuarios WHERE id = $1', [id]);
+    const user = rows[0];
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
@@ -138,16 +150,14 @@ app.post('/api/users/:id/role', requireRole('admin', 'super_admin'), (req, res) 
         return res.status(403).json({ message: 'No autorizado' });
       }
     }
-    db.update({ _id: id }, { $set: { rol } }, {}, (err, num) => {
-      if (err) {
-        return res.status(500).json({ message: 'Error en el servidor' });
-      }
-      if (num === 0) {
-        return res.status(404).json({ message: 'Usuario no encontrado' });
-      }
-      return res.status(200).json({ message: 'Rol actualizado' });
-    });
-  });
+    const result = await pool.query('UPDATE usuarios SET rol = $1 WHERE id = $2', [rol, id]);
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    return res.status(200).json({ message: 'Rol actualizado' });
+  } catch (err) {
+    return res.status(500).json({ message: 'Error en el servidor' });
+  }
 });
 
 app.get('/dashboard-admin', requireRole('admin', 'super_admin'), (req, res) => {

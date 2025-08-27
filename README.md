@@ -24,3 +24,22 @@ El servidor se ejecuta por defecto en el puerto `3000`. Puedes cambiarlo estable
 ### Registro de usuarios
 
 Los nuevos usuarios se crean siempre con el rol `cliente`; no es posible seleccionar un rol diferente durante el registro.
+
+## Base de datos
+
+Esta versión utiliza **PostgreSQL** para almacenar los usuarios. Para que el servidor funcione necesitas:
+
+1. Tener una instancia de PostgreSQL accesible.
+2. Definir la variable de entorno `DATABASE_URL` con la cadena de conexión completa  
+   (por ejemplo: `postgres://usuario:password@host:5432/mi_base`).
+3. El servidor creará automáticamente la tabla `usuarios` si no existe. El esquema es:
+   ```sql
+   CREATE TABLE IF NOT EXISTS usuarios (
+     id SERIAL PRIMARY KEY,
+     usuario TEXT UNIQUE NOT NULL,
+     password TEXT NOT NULL,
+     rol TEXT NOT NULL
+   );
+   ```
+
+En entornos de producción donde el proveedor requiera SSL (como algunos planes gratuitos), deja `NODE_ENV=production` para habilitar una conexión segura.
