@@ -44,4 +44,4 @@ Esta versión utiliza **PostgreSQL** para almacenar los usuarios. Para que el se
    );
    ```
 
-En entornos de producción donde el proveedor requiera SSL (como algunos planes gratuitos), deja `NODE_ENV=production` para habilitar una conexión segura.
+Si la base de datos remota requiere SSL (como ocurre en algunos proveedores), la conexión lo habilita automáticamente siempre que `DATABASE_URL` no apunte a `localhost`.
