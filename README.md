@@ -30,8 +30,10 @@ Los nuevos usuarios se crean siempre con el rol `cliente`; no es posible selecci
 Esta versión utiliza **PostgreSQL** para almacenar los usuarios. Para que el servidor funcione necesitas:
 
 1. Tener una instancia de PostgreSQL accesible.
-2. Definir la variable de entorno `DATABASE_URL` con la cadena de conexión completa  
-   (por ejemplo: `postgres://usuario:password@host:5432/mi_base`).
+2. Definir la variable de entorno `DATABASE_URL` con la cadena de conexión completa
+   (por ejemplo: `export DATABASE_URL="postgres://usuario:password@host:5432/mi_base"`).
+   Si prefieres cargarla desde un archivo local, crea un fichero `.env` con esa clave y
+   el servidor la leerá automáticamente mediante [`dotenv`](https://www.npmjs.com/package/dotenv).
 3. El servidor creará automáticamente la tabla `usuarios` si no existe. El esquema es:
    ```sql
    CREATE TABLE IF NOT EXISTS usuarios (
@@ -42,4 +44,4 @@ Esta versión utiliza **PostgreSQL** para almacenar los usuarios. Para que el se
    );
    ```
 
-En entornos de producción donde el proveedor requiera SSL (como algunos planes gratuitos), deja `NODE_ENV=production` para habilitar una conexión segura.
+Si la base de datos remota requiere SSL (como ocurre en algunos proveedores), la conexión lo habilita automáticamente siempre que `DATABASE_URL` no apunte a `localhost`.
